@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang = "ua">
+<head>
+    <meta charset="UTF-8">
+    <title>GrechaForFans</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img id="left-logo" src="images/logo-img.jpg" alt="left-logo">
+            <img id="long-logo" src="images/long-logo.png" alt="long-logo">
+        </div>
+    </header>
+    <div id="content">
+        <div id="menu-block">
+            <div id="sorter">
+                <p>Сортувати за спаданням ціни</p>
+            </div>
+            <div if="filter">
+                <p>Фільтрувати за: </p>
+                <Br></Br>
+                <p>Вагою: </p>
+                <p>
+                    <input type="checkbox" name="weight>1000g">> 1000г.<Br>
+                    <input type="checkbox" name="weight1000g">1000г.<Br>
+                    <input type="checkbox" name="weight800g">800г.<Br>
+                    <input type="checkbox" name="weight600g">600г.<Br>
+                    <input type="checkbox" name="weight400g">400г.<Br>
+                    <input type="checkbox" name="weight200g">200г.<Br>
+                    <Br></Br>          
+                </p>
+                <p>Виробником: </p>
+                <p>
+                    <input type="checkbox" name="Pere">Pere<Br>
+                    <input type="checkbox" name="Zhmenka">Жменька<Br>
+                    <input type="checkbox" name="Scotti">Scotti<Br>
+                </p>
+            </div>
+        </div>
+        <div id="offers">
+            <div class="offer-block" id="rozetka-offers">
+                <p>rozetka-offers</p>
+            </div>
+            <div class="offer-block" id="prom-offers">
+                <p>prom-offers</p>
+            </div>
+            <div class="offer-block" id="epicentr-offers">
+                <p>epicentr-offers</p>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
