@@ -20,7 +20,6 @@ li{
 header{
 	display: block;
 	width: 100%;
-	padding: 5px 20px;
 	background: linear-gradient(90deg,#ff8e44, #f91362, #35126a);
 }
 #logo{
@@ -38,6 +37,7 @@ header{
 	display: block;
 	width: 40%;
 	user-select: none;
+	margin: 10px 0;
 }
 #content{
 	display: flex;
@@ -70,9 +70,6 @@ input[type="checkbox"]{
 #filter-accept{
 
 }
-#spacer{
-
-}
 #offers{
 	display: flex;
 	justify-content: space-around;
@@ -94,4 +91,10 @@ input[type="checkbox"]{
 	max-height: 100%;
 	min-height: 100%;
 	resize: both;
+}
+#text-area{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	margin: 0 10px;
 }
