@@ -21,5 +21,17 @@ namespace DAL
         {
             options.UseSqlite("Data Source=buckwheat.db");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Lot>()
+                .HasMany(x => x.Prices)
+                .WithOne(x => x.Lot);
+            modelBuilder.Entity<Lot>()
+                .HasOne(x => x.Shop)
+                .WithMany(x => x.Lots);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
