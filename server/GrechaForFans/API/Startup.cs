@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapperConfiguration;
+using BLL.Services;
+using BLL.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +18,10 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DAL.BuckwheatContext>();
+
+            services.AddScoped<ILotsService, LotsService>();
+            services.AddScoped<IPricesService, PricesService>();
+            services.AddScoped<IShopsService, ShopsService>();
 
             services.AddControllers();
 
