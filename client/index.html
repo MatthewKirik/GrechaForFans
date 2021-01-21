@@ -14,30 +14,32 @@
 	</header>
 	<div id="content">
 		<div id="menu-block">
-			<div id="sorter">
-				<button>Сортувати за зростанням ціни 🠗</button>
-			</div>
+			<button id = "sorter">Сортувати за зростанням ціни 🠗🠕</button>
 			<div id="filter">
 				<div class="chosen-filters">
 					<p>Вибрані фільтри: <span id="chosen-filters">жодного</span></p>
 				</div>
 				<p>Фільтрувати за: </p>
-				<p><b>Вага: </b></p>
-				<p>
-					<input type="checkbox" name="weight>1000g">>1000г.<br>
-					<input type="checkbox" name="weight1000g">1000г.<br>
-					<input type="checkbox" name="weight800g">800г.<br>
-					<input type="checkbox" name="weight600g">600г.<br>
-					<input type="checkbox" name="weight400g">400г.<br>
-					<input type="checkbox" name="weight200g">200г.<br>      
-				</p>
+				<div id="weight-filter">
+					<p><b>Вага: </b></p>
+					<p>
+						<input type="checkbox" name="weight>1000g">>1000г.<br>
+						<input type="checkbox" name="weight1000g">1000г.<br>
+						<input type="checkbox" name="weight800g">800г.<br>
+						<input type="checkbox" name="weight600g">600г.<br>
+						<input type="checkbox" name="weight400g">400г.<br>
+						<input type="checkbox" name="weight200g">200г.<br>      
+					</p>
+				</div>
 				<tr></tr>
-				<p><b>Виробник: </b></p>
-				<p>
-					<input type="checkbox" name="Pere">Pere<br>
-					<input type="checkbox" name="Zhmenka">Жменька<br>
-					<input type="checkbox" name="Scotti">Scotti<br>
-				</p>
+				<div id="producer-filter">
+					<p><b>Виробник: </b></p>
+					<p>
+						<input type="checkbox" name="Pere">Pere<br>
+						<input type="checkbox" name="Zhmenka">Жменька<br>
+						<input type="checkbox" name="Scotti">Scotti<br>
+					</p>
+				</div>
 				<button id="filter-accept">Прийняти фільтри</button>
 			</div>
 		</div>

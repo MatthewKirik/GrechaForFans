@@ -42,6 +42,7 @@ header{
 #menu-block{
 	display: flex;
 	flex-direction: column;
+	/*align-items: center;*/
 	/*background-color: rgb(219, 219, 219);*/
 	width: 20%;
 	height: 100%;
@@ -49,22 +50,23 @@ header{
 	border-right: 1px dashed black;
 }
 #sorter{
-
+	width: 95%;
 }
 #filter{
+	margin-top: 20px;
+}
+#filter-accept{
 
 }
 #offers{
 	display: flex;
+	justify-content: space-around;
 	width: 87%;
 	padding-top: 3%;
 	padding-left: 1%;
 }
 .offer-block{
-	width: 33.3%;
-}
-#sorter{
-	width: 100%;
+
 }
 .offer{
 	display:flex;
