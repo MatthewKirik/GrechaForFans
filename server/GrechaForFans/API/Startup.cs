@@ -15,6 +15,8 @@ namespace API
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DAL.BuckwheatContext>();
+
             services.AddControllers();
 
             services.AddSingleton(AutoMapperConfigurator.GetMapper());

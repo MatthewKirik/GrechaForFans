@@ -6,15 +6,14 @@ using System.Text;
 
 namespace DAL
 {
-    internal class BuckwheatContext : DbContext
+    public class BuckwheatContext : DbContext
     {
         public DbSet<Lot> Lots { get; set; }
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Price> Prices { get; set; }
 
-        internal BuckwheatContext()
+        public BuckwheatContext()
         {
-            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
