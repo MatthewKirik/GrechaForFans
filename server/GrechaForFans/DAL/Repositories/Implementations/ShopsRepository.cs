@@ -18,19 +18,33 @@ namespace DAL.Repositories.Implementations
             this.mapper = mapper;
         }
 
-        public Task AddShop(ShopDto shopData)
+        public async Task AddShop(ShopDto shopData)
         {
-            throw new NotImplementedException();
+            using (var db = new BuckwheatContext())
+            {
+                Shop shop = mapper.Map<ShopDto, Shop>(shopData);
+                shop.Lots = null;
+                await db.Shops.AddAsync(shop);
+                await db.SaveChangesAsync();
+            }
         }
 
-        public Task<ShopDto> GetShop(int shopId)
+        public async Task<ShopDto> GetShop(int shopId)
         {
-            throw new NotImplementedException();
+            using (var db = new BuckwheatContext())
+            {
+                var shop = await db.Shops.FirstOrDefaultAsync(x => x.Id == shopId);
+                return mapper.Map<Shop, ShopDto>(shop);
+            }
         }
 
-        public Task<ShopDto> GetShop(string name)
+        public async Task<ShopDto> GetShop(string name)
         {
-            throw new NotImplementedException();
+            using (var db = new BuckwheatContext())
+            {
+                var shop = await db.Shops.FirstOrDefaultAsync(x => x.Name == name);
+                return mapper.Map<Shop, ShopDto>(shop);
+            }
         }
 
         public async Task<List<ShopDto>> GetShops()
