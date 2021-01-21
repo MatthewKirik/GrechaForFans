@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+li{
+    text-decoration: none;
+    list-style: none;
+}
+#logo{
+    display: flex;
+    width: 100%;
+    height: 8%;
+    background: linear-gradient(90deg,#ff8e44, #f91362, #35126a );
+}
+#left-logo{
+    display: block;
+    width: 13%;
+}
+#long-logo{
+    width: 40%;
+}
+#content{
+    display: flex;
+    width: 100%;
+}
+#menu-block{
+    background-color: rgb(219, 219, 219);
+    width: 13%;
+}
+#offers{
+    display: flex;
+    width: 87%;
+}
+.offer-block{
+    width: 29%;
+}
+#sorter{
+    width: 100%;
+}
