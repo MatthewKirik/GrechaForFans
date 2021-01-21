@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DAL.Models;
+using DataTransfer;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +11,9 @@ namespace AutoMapperConfiguration
     {
         public MappingProfile()
         {
+            CreateMap<Lot, LotDto>().ReverseMap();
+            CreateMap<Price, PriceDto>().ReverseMap();
+            CreateMap<Shop, ShopDto>().ReverseMap();
         }
     }
 }
