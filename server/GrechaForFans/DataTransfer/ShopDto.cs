@@ -7,7 +7,5 @@ namespace DataTransfer
     public class ShopDto : BaseDto
     {
         public string Name { get; set; }
-
-        public List<LotDto> Lots { get; set; }
     }
 }

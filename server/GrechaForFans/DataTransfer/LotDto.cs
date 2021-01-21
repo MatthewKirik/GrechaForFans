@@ -20,10 +20,5 @@ namespace DataTransfer
         /// Optional
         /// </summary>
         public ShopDto Shop { get; set; }
-
-        /// <summary>
-        /// Optional
-        /// </summary>
-        public List<PriceDto> Prices { get; set; }
     }
 }
