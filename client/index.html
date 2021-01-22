@@ -2,6 +2,7 @@
 <html lang = "ua">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>GrechaForFans</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/mobile.css">
@@ -9,12 +10,15 @@
 <body>
 	<header>
 		<div id="logo">
-			<img id="left-logo" src="img/logo-img.jpg" alt="left-logo">
+			<img class="pc-only" id="left-logo" src="img/logo-img.jpg" alt="left-logo">
 			<img id="long-logo" src="img/long-logo.png" alt="long-logo">
 		</div>
 	</header>
+	<div id="arrow-box" style="display: none">
+		<img src="img/arrow.png" id ="arrow" alt="">
+	</div>
 	<div id="content">
-		<div id="menu-block">
+		<div class="pc-only" id="menu-block">
 			<button id = "sorter">Сортувати за зростанням ціни 🠗🠕</button>
 			<div id="filter">
 				<div class="chosen-filters">
@@ -43,7 +47,7 @@
 				<button id="filter-accept">Прийняти фільтри</button>
 			</div>
 		</div>
-		<hr id = "spacer">
+		<hr class = "pc-only" id = "spacer">
 		<div id="offers">
 			<div class="offer-block" id="rozetka-offers">
 				<div class="offer">
@@ -55,7 +59,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="offer-block" id="prom-offers">
+			<div class="offer-block pc-only" id="prom-offers">
 				<div class="offer">
 					<img src="img/logo-img.jpg" alt="Grecha">
 					<div id="text-area">
@@ -65,7 +69,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="offer-block" id="epicentr-offers">
+			<div class="offer-block pc-only" id="epicentr-offers">
 				<div class="offer">
 					<img src="img/logo-img.jpg" alt="Grecha">
 					<div id="text-area">
@@ -74,6 +78,11 @@
 						<a href="">Перейти на сайт</a>
 					</div>
 				</div>
+			</div>
+			<div id="dots" style="display: none;">
+				<span>⚪</span>
+				<span>🔵</span>
+				<span>🔵</span>
 			</div>
 		</div>
 	</div>
