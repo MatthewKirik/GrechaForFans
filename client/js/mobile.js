@@ -1,6 +1,5 @@
 const menu = document.querySelector("#menu-block");
 const arrow_box = document.querySelector("#arrow-box");
-
 const showMenu = () => {
 	menu.style = "left: 0%";
 	arrow_box.style = "left: 50%; transform: rotateY(180deg);";
