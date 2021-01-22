@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.Services;
+using DataTransfer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +13,15 @@ namespace API.Controllers
     [ApiController]
     public class PricesController : ControllerBase
     {
-        [HttpGet("lowest")]
-        public async Task<IEnumerable<string>> GetLowestPrices()
+        IPricesService pricesService;
+
+        public PricesController(IPricesService pricesService)
         {
-            return new string[] { "hi", "there" };
+            this.pricesService = pricesService;
         }
+
+        [HttpGet("{lotId}")]
+        public async Task<IEnumerable<PriceDto>> GetPrices(int lotId)
+            => await pricesService.GetPrices(lotId);
     }
 }

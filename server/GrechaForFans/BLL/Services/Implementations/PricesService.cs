@@ -1,4 +1,5 @@
-﻿using DataTransfer;
+﻿using DAL.Repositories;
+using DataTransfer;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +9,14 @@ namespace BLL.Services.Implementations
 {
     public class PricesService : IPricesService
     {
-        public Task<List<PriceDto>> GetPrices(int lotId)
+        IPricesRepository pricesRepository;
+
+        public PricesService(IPricesRepository pricesRepository)
         {
-            throw new NotImplementedException();
+            this.pricesRepository = pricesRepository;
         }
+
+        public Task<List<PriceDto>> GetPrices(int lotId)
+            => pricesRepository.GetPrices(lotId);
     }
 }

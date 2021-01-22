@@ -1,5 +1,6 @@
 ﻿
 using DataTransfer;
+using DataTransfer.Filters;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,11 +12,7 @@ namespace DAL.Repositories
     {
         Task AddLot(LotDto lotData, int shopId);
         Task<LotDto> GetLot(int lotId);
-        Task<List<LotDto>> GetLots();
-        Task<List<LotDto>> GetLots(int shopId);
-        Task<List<LotDto>> GetCheapestLots(int amount);
-        Task<List<LotDto>> GetCheapestLots(int shopId, int amount);
-        Task<List<LotDto>> GetCheapestLots(int amount, DateTime afterDate);
-        Task<List<LotDto>> GetCheapestLots(int shopId, int amount, DateTime afterDate);
+        Task<List<LotDto>> GetLots(LotFilter filter);
+        Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null);
     }
 }

@@ -16,10 +16,8 @@ namespace BLL.Services.Implementations
             this.shopsRepository = shopsRepository;
         }
 
-        public Task<ShopDto> GetShop(int shopId)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<ShopDto> GetShop(int shopId)
+            => await shopsRepository.GetShop(shopId);
 
         public async Task<List<ShopDto>> GetShops() 
             => await shopsRepository.GetShops();

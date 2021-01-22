@@ -1,4 +1,6 @@
-﻿using DataTransfer;
+﻿using DAL.Repositories;
+using DataTransfer;
+using DataTransfer.Filters;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,39 +10,20 @@ namespace BLL.Services.Implementations
 {
     public class LotsService : ILotsService
     {
-        public Task<List<LotDto>> GetCheapestLots(int amount)
+        ILotsRepository lotsRepository;
+
+        public LotsService(ILotsRepository lotsRepository)
         {
-            throw new NotImplementedException();
+            this.lotsRepository = lotsRepository;
         }
 
-        public Task<List<LotDto>> GetCheapestLots(int shopId, int amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<LotDto>> GetCheapestLots(int amount, DateTime afterDate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<LotDto>> GetCheapestLots(int shopId, int amount, DateTime afterDate)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null)
+            => lotsRepository.GetCheapestLots(filter, toDate);
 
         public Task<LotDto> GetLot(int lotId)
-        {
-            throw new NotImplementedException();
-        }
+            => lotsRepository.GetLot(lotId);
 
-        public Task<List<LotDto>> GetLots()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<LotDto>> GetLots(int shopId)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<List<LotDto>> GetLots(LotFilter filter)
+            => lotsRepository.GetLots(filter);
     }
 }

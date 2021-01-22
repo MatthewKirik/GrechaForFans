@@ -23,5 +23,9 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IEnumerable<ShopDto>> GetShops()
             => await shopsService.GetShops();
+
+        [HttpGet("{id}")]
+        public async Task<ShopDto> GetShop(int id)
+            => await shopsService.GetShop(id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DAL.Models;
 using DataTransfer;
+using DataTransfer.Filters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,47 +34,55 @@ namespace DAL.Repositories.Implementations
             }
         }
 
-        public async Task<List<LotDto>> GetCheapestLots(int amount)
+        public async Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null)
         {
-            throw new NotImplementedException();
-            //using (var db = new BuckwheatContext())
-            //{
-            //    var lots = await db.Prices
-            //        .OrderBy(x => x.Value)
-            //        .Take(amount)
-            //        .Select
-            //        .ToListAsync();
-            //}
+            toDate ??= DateTime.MaxValue;
+            var limit = filter.Limit <= 50 ? filter.Limit : 50;
+
+            using (var db = new BuckwheatContext())
+            {
+                var lotsQuery = db.Lots.AsQueryable();
+                if (filter.ShopId != null)
+                    lotsQuery = lotsQuery.Where(x => x.Shop.Id == filter.ShopId);
+                if (filter.WeightInGrams != null)
+                    lotsQuery = lotsQuery.Where(x => x.WeightInGrams == filter.WeightInGrams);
+
+                var lastPricesQuery = lotsQuery.Select(x =>
+                        db.Prices
+                        .Where(x => x.Lot.Id == x.Id && x.Date <= toDate)
+                        .OrderByDescending(x => x.Date)
+                        .FirstOrDefault());
+
+                var cheapestLotsQuery = lastPricesQuery
+                    .OrderBy(x => x.Value)
+                    .Take(filter.Limit)
+                    .Select(x => x.Lot);
+
+                return mapper.Map<List<Lot>, List<LotDto>>(await cheapestLotsQuery.ToListAsync());
+            }
         }
 
-        public Task<List<LotDto>> GetCheapestLots(int shopId, int amount)
+        public async Task<LotDto> GetLot(int lotId)
         {
-            throw new NotImplementedException();
+            using (var db = new BuckwheatContext())
+            {
+                var lot = await db.Lots.FirstOrDefaultAsync(x => x.Id == lotId);
+                return mapper.Map<Lot, LotDto>(lot);
+            }
         }
 
-        public Task<List<LotDto>> GetCheapestLots(int amount, DateTime afterDate)
+        public async Task<List<LotDto>> GetLots(LotFilter filter)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<LotDto>> GetCheapestLots(int shopId, int amount, DateTime afterDate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<LotDto> GetLot(int lotId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<LotDto>> GetLots()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<LotDto>> GetLots(int shopId)
-        {
-            throw new NotImplementedException();
+            using (var db = new BuckwheatContext())
+            {
+                var lots = db.Lots.AsQueryable();
+                if (filter.ShopId != null) 
+                    lots = lots.Where(x => x.Shop.Id == filter.ShopId);
+                if (filter.WeightInGrams != null)
+                    lots = lots.Where(x => x.WeightInGrams == filter.WeightInGrams);
+                lots = lots.Take(filter.Limit);
+                return mapper.Map<List<Lot>, List<LotDto>>(await lots.ToListAsync());
+            }
         }
     }
 }
