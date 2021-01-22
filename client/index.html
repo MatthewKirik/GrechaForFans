@@ -1,60 +1,81 @@
 <!DOCTYPE html>
 <html lang = "ua">
 <head>
-    <meta charset="UTF-8">
-    <title>GrechaForFans</title>
-    <link rel="stylesheet" href="css/style.css">
+	<meta charset="UTF-8">
+	<title>GrechaForFans</title>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div id="logo">
-            <img id="left-logo" src="images/logo-img.jpg" alt="left-logo">
-            <img id="long-logo" src="images/long-logo.png" alt="long-logo">
-        </div>
-    </header>
-    <div id="content">
-        <div id="menu-block">
-            <div id="sorter">
-                <button>Сортувати за зростанням ціни</button>
-            </div>
-            <div if="filter">
-                <p>Фільтрувати за: </p>
-                <p>Вагою: </p>
-                <p>
-                    <input type="checkbox" name="weight>1000g">> 1000г.<Br>
-                    <input type="checkbox" name="weight1000g">1000г.<Br>
-                    <input type="checkbox" name="weight800g">800г.<Br>
-                    <input type="checkbox" name="weight600g">600г.<Br>
-                    <input type="checkbox" name="weight400g">400г.<Br>
-                    <input type="checkbox" name="weight200g">200г.<Br>      
-                </p>
-                <tr></tr>
-                <p>Виробником: </p>
-                <p>
-                    <input type="checkbox" name="Pere">Pere<Br>
-                    <input type="checkbox" name="Zhmenka">Жменька<Br>
-                    <input type="checkbox" name="Scotti">Scotti<Br>
-                </p>
-                <button id="filter-accept">Прийняти фільтри</button>
-            </div>
-        </div>
-        <div id="offers">
-            <div class="offer-block" id="rozetka-offers">
-                <div class="offer">
-                    <img src="images/logo-img.jpg" alt="Grecha">
-                    <div id="text-area">
-                        <p id="name">Греча від Купеча</p>
-                        <p id="price">49.99 грн/кг</p>
-                        <a href="">Перейти на сайт</a>
-                    </div>
-                </div>
-            </div>
-            <div class="offer-block" id="prom-offers">
-            </div>
-            <div class="offer-block" id="epicentr-offers">
-            </div>
-        </div>
-    </div>
-    <script src="js/script.js"></script>
+	<header>
+		<div id="logo">
+			<img id="left-logo" src="img/logo-img.jpg" alt="left-logo">
+			<img id="long-logo" src="img/long-logo.png" alt="long-logo">
+		</div>
+	</header>
+	<div id="content">
+		<div id="menu-block">
+			<button id = "sorter">Сортувати за зростанням ціни 🠗🠕</button>
+			<div id="filter">
+				<div class="chosen-filters">
+					<p>Вибрані фільтри: <span id="chosen-filters">жодного</span></p>
+				</div>
+				<h4>Фільтрувати за: </h4>
+				<div id="weight-filter">
+					<h3>Вага: </h3>
+					<p>
+						<input type="checkbox" name="weight>1000g"> >1000г.<br>
+						<input type="checkbox" name="weight1000g"> 1000г.<br>
+						<input type="checkbox" name="weight800g"> 800г.<br>
+						<input type="checkbox" name="weight600g"> 600г.<br>
+						<input type="checkbox" name="weight400g"> 400г.<br>
+						<input type="checkbox" name="weight200g"> 200г.<br>      
+					</p>
+				</div>
+				<div id="producer-filter">
+					<h3>Виробник: </h3>
+					<p>
+						<input type="checkbox" name="Pere"> Pere<br>
+						<input type="checkbox" name="Zhmenka"> Жменька<br>
+						<input type="checkbox" name="Scotti"> Scotti<br>
+					</p>
+				</div>
+				<button id="filter-accept">Прийняти фільтри</button>
+			</div>
+		</div>
+		<hr id = "spacer">
+		<div id="offers">
+			<div class="offer-block" id="rozetka-offers">
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
+			</div>
+			<div class="offer-block" id="prom-offers">
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
+			</div>
+			<div class="offer-block" id="epicentr-offers">
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/script.js"></script>
 </body>
 </html>
