@@ -1,8 +1,8 @@
-@media (orientation: portrait) and (max-width: 1279px){
+@media (orientation: portrait) and (max-width: 1023px){
 	html, body{
 		height: 100vh;
 	}
-	.pc-only{
+	.hidden{
 		display: none !important;
 	}
 	header{
@@ -16,12 +16,22 @@
 	#long-logo{
 		width: 100%;
 	}
+	#menu-block{
+		position: absolute;
+		left: -75%;
+		top: 15vh;
+		width: 75%;
+		height: initial;
+		background-color: rgba(255, 255, 255, .75);
+		border: 1px dashed black;
+		transition: 0.5s;
+	}
 	#arrow-box{
 		display: block !important;
 		position: absolute;
 		top: 50%;
 		z-index: 1000;
-
+		transition: 0.5s;
 	}
 	#arrow{
 		width: 70px;

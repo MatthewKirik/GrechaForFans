@@ -10,15 +10,12 @@
 <body>
 	<header>
 		<div id="logo">
-			<img class="pc-only" id="left-logo" src="img/logo-img.jpg" alt="left-logo">
+			<img class="hidden" id="left-logo" src="img/logo-img.jpg" alt="left-logo">
 			<img id="long-logo" src="img/long-logo.png" alt="long-logo">
 		</div>
 	</header>
-	<div id="arrow-box" style="display: none">
-		<img src="img/arrow.png" id ="arrow" alt="">
-	</div>
 	<div id="content">
-		<div class="pc-only" id="menu-block">
+		<div id="menu-block" hidden="true">
 			<button id = "sorter">Сортувати за зростанням ціни 🠗🠕</button>
 			<div id="filter">
 				<div class="chosen-filters">
@@ -47,7 +44,10 @@
 				<button id="filter-accept">Прийняти фільтри</button>
 			</div>
 		</div>
-		<hr class = "pc-only" id = "spacer">
+		<div id="arrow-box" style="display: none; left: 0%;">
+			<img src="img/arrow.png" id ="arrow" alt="">
+		</div>
+		<hr class = "hidden" id = "spacer">
 		<div id="offers">
 			<div class="offer-block" id="rozetka-offers">
 				<div class="offer">
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="offer-block pc-only" id="prom-offers">
+			<div class="offer-block hidden" id="prom-offers">
 				<div class="offer">
 					<img src="img/logo-img.jpg" alt="Grecha">
 					<div id="text-area">
@@ -69,7 +69,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="offer-block pc-only" id="epicentr-offers">
+			<div class="offer-block hidden" id="epicentr-offers">
 				<div class="offer">
 					<img src="img/logo-img.jpg" alt="Grecha">
 					<div id="text-area">
@@ -80,12 +80,13 @@
 				</div>
 			</div>
 			<div id="dots" style="display: none;">
-				<span>⚪</span>
-				<span>🔵</span>
-				<span>🔵</span>
+				<span class = "dot" id = "0">⚪</span>
+				<span class = "dot" id = "1">🔵</span>
+				<span class = "dot" id = "2">🔵</span>
 			</div>
 		</div>
 	</div>
 	<script src="js/script.js"></script>
+	<script src="js/mobile.js"></script>
 </body>
 </html>
