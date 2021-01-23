@@ -14,12 +14,12 @@ namespace BLL.Parsers.Implementations
 {
     public class PromUaParser : IParser, IDisposable
     {
-        IWebDriver webDriver;
-        Microsoft.Extensions.Configuration.IConfiguration config;
-        ShopDto shop;
-        Regex keywordsRegex;
-        Regex kilogramsRegex = new Regex("\\d+\\s*(кг)", RegexOptions.IgnoreCase);
-        Regex gramsRegex = new Regex("\\d+\\s*(г)", RegexOptions.IgnoreCase);
+        private IWebDriver webDriver;
+        private Microsoft.Extensions.Configuration.IConfiguration config;
+        private ShopDto shop;
+        private Regex keywordsRegex;
+        private Regex kilogramsRegex = new Regex("\\d+\\s*(кг)", RegexOptions.IgnoreCase);
+        private Regex gramsRegex = new Regex("\\d+\\s*(г)", RegexOptions.IgnoreCase);
         private bool disposedValue;
 
         public PromUaParser(Microsoft.Extensions.Configuration.IConfiguration config)
@@ -32,9 +32,10 @@ namespace BLL.Parsers.Implementations
             await Task.Run(() =>
             {
                 var options = new ChromeOptions();
-                webDriver = new ChromeDriver(options);
+                webDriver = new ChromeDriver("C:\\Program Files (x86)", options);
                 this.shop = shop;
                 this.keywordsRegex = keywordsPattern;
+
             });
         }
 
@@ -122,6 +123,4 @@ namespace BLL.Parsers.Implementations
             GC.SuppressFinalize(this);
         }
     }
-
-
 }
