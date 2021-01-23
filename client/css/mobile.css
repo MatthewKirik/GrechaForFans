@@ -59,6 +59,7 @@
 		padding-top: 20px;
 		align-items: center;
 		justify-content: center;
+		padding-bottom: 70px; 
 	}
 	.offer{
 		width: auto;
@@ -85,8 +86,6 @@
 		padding-left: 25%;
 		padding-right: 25%;
 		background-color: rgba(240, 240, 240, .9);
-		
-		
 	}
 	@media (orientation: landscape) {
 		header{
