@@ -85,9 +85,10 @@ input[type="checkbox"]{
 }
 .offer, .company-logo{
 	display:flex;
+	justify-content: center;
 	margin: 2px;
 	height: 100px;
-	background-color: blanchedalmond;
+	/*background-color: blanchedalmond;*/
 	margin-top: 10px;
 }
 .offer img{
