@@ -1,4 +1,5 @@
-﻿using DataTransfer;
+﻿using AngleSharp;
+using DataTransfer;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,11 @@ namespace BLL.Parsers.Implementations
         {
             var config = AngleSharp.Configuration.Default;
             this.browsingContext = AngleSharp.BrowsingContext.New(config);
+        }
+
+        public Task Initialize(ShopDto shop)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<List<LotDto>> ParseLots(int pagesAmount)

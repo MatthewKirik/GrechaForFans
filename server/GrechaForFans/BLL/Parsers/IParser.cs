@@ -8,6 +8,7 @@ namespace BLL.Parsers
 {
     interface IParser
     {
+        public Task Initialize(ShopDto shop);
         public Task<List<LotDto>> ParseLots(int pagesAmount);
     }
 }
