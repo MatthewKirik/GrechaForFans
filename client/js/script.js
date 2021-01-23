@@ -8,4 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	if(window.innerWidth < 1023) {
 		include("js/mobile.js");
 	}
+	document.querySelector("body").onresize = () => {
+		window.location.reload();
+	};
 });
