@@ -1,11 +1,12 @@
 'use strict';
 const menu = document.querySelector("#menu-block");
+const menuWidth = +window.getComputedStyle(menu).getPropertyValue('width').replace("px", "");
 const arrowBox = document.querySelector("#arrow-box");
 const dots = document.querySelectorAll(".dot");
 
 const showMenu = () => {
 	menu.style = "left: 0%";
-	arrowBox.style = "left: 50%; transform: rotateY(180deg);";
+	arrowBox.style = `left: ${menuWidth}px; transform: rotateY(180deg);`;
 	menu.hidden = false;
 }
 const hideMenu = () => {
@@ -15,6 +16,31 @@ const hideMenu = () => {
 }
 
 arrowBox.onclick = () => menu.hidden ? showMenu() : hideMenu();
+
+arrowBox.ontouchstart = event => {
+	const touchX = event.touches[0].clientX;
+	const arrowBoxStartX = +window.getComputedStyle(arrowBox).getPropertyValue('left').replace("px", "");
+	
+	arrowBox.ontouchmove = event => {
+		const direction = menu.hidden ? 1 : 0;
+		const arrowBoxX = arrowBoxStartX + event.touches[0].clientX - touchX;
+		const menuX = arrowBoxX - menuWidth;
+		if (arrowBoxX < menuWidth && arrowBoxX >= 0) {
+			arrowBox.style = `left: ${arrowBoxX}px; transform: rotateY(${direction === 1 ? "0deg" : "180deg"}); transition: 0s;`;
+			menu.style = `left: ${menuX}px; transition: 0s;`;
+		}
+	}
+
+	arrowBox.ontouchend = event => {
+		arrowBox.ontouchmove = undefined;
+		const x = event.changedTouches[0].clientX;
+		if (x > menuWidth * 0.5) {
+			showMenu();
+		} else {
+			hideMenu();
+		}
+	}
+}
 
 const activeButton = "⚪";
 const inactiveButton = "🔵";
