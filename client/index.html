@@ -2,18 +2,20 @@
 <html lang = "ua">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>GrechaForFans</title>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
 	<header>
 		<div id="logo">
-			<img id="left-logo" src="img/logo-img.jpg" alt="left-logo">
+			<img class="hidden" id="left-logo" src="img/logo-img.jpg" alt="left-logo">
 			<img id="long-logo" src="img/long-logo.png" alt="long-logo">
 		</div>
 	</header>
 	<div id="content">
-		<div id="menu-block">
+		<div id="menu-block" hidden>
 			<button id = "sorter">Сортувати за зростанням ціни 🠗🠕</button>
 			<div id="filter">
 				<div class="chosen-filters">
@@ -42,7 +44,10 @@
 				<button id="filter-accept">Прийняти фільтри</button>
 			</div>
 		</div>
-		<hr id = "spacer">
+		<div id="arrow-box" style="display: none; left: 0%;">
+			<img src="img/arrow.png" id ="arrow" alt="">
+		</div>
+		<hr class = "hidden" id = "spacer">
 		<div id="offers">
 			<div class="offer-block" id="rozetka-offers">
 				<div class="company-logo">
@@ -56,8 +61,58 @@
 						<a href="">Перейти на сайт</a>
 					</div>
 				</div>
+
+
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
+				<div class="offer">
+					<img src="img/logo-img.jpg" alt="Grecha">
+					<div id="text-area">
+						<h4><p id="name">Греча від Купеча</p></h4>
+						<p id="price">49.99 грн/кг</p>
+						<a href="">Перейти на сайт</a>
+					</div>
+				</div>
 			</div>
-			<div class="offer-block" id="prom-offers">
+			<div class="offer-block hidden" id="prom-offers">
 				<div class="company-logo">
 					<img src="img/Prom.png" alt="">
 				</div>
@@ -70,7 +125,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="offer-block" id="epicentr-offers">
+			<div class="offer-block hidden" id="epicentr-offers">
 				<div class="company-logo">
 					<img src="img/Epicentr.png" alt="">
 				</div>
@@ -82,6 +137,11 @@
 						<a href="">Перейти на сайт</a>
 					</div>
 				</div>
+			</div>
+			<div id="dots" style="display: none;">
+				<span class = "dot" for="rozetka-offers"></span>
+				<span class = "dot" for="prom-offers"></span>
+				<span class = "dot" for="epicentr-offers"></span>
 			</div>
 		</div>
 	</div>
