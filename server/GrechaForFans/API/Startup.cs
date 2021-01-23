@@ -23,13 +23,17 @@ namespace API
         {
             services.AddDbContext<DAL.BuckwheatContext>();
 
-            services.AddScoped<ILotsRepository, LotsRepository>();
-            services.AddScoped<IPricesRepository, PricesRepository>();
-            services.AddScoped<IShopsRepository, ShopsRepository>();
+            services.AddTransient<ILotsRepository, LotsRepository>();
+            services.AddTransient<IPricesRepository, PricesRepository>();
+            services.AddTransient<IShopsRepository, ShopsRepository>();
 
-            services.AddScoped<ILotsService, LotsService>();
-            services.AddScoped<IPricesService, PricesService>();
-            services.AddScoped<IShopsService, ShopsService>();
+            services.AddTransient<ILotsService, LotsService>();
+            services.AddTransient<IPricesService, PricesService>();
+            services.AddTransient<IShopsService, ShopsService>();
+
+            services.AddScoped<IParsingService, ParsingService>();
+
+            services.AddHostedService<ParsingService>();
 
             services.AddControllers();
 
@@ -56,10 +60,6 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapGet("/", async context =>
-                //{
-                //    await context.Response.WriteAsync("Hello World!");
-                //});
             });
 
             app.UseSwagger();

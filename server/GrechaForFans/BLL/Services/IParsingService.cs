@@ -7,7 +7,6 @@ namespace BLL.Services
 {
     public interface IParsingService
     {
-        Task Initialize();
         Task StartParsing();
     }
 }
