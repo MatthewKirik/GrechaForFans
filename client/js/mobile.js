@@ -17,8 +17,10 @@ const hideMenu = () => {
 
 arrowBox.onclick = () => menu.hidden ? showMenu() : hideMenu();
 
+//dragging sidebar menu
 arrowBox.ontouchstart = event => {
 	const touchX = event.touches[0].clientX;
+	const touchY = event.touches[0].clientY;
 	const arrowBoxStartX = +window.getComputedStyle(arrowBox).getPropertyValue('left').replace("px", "");
 	
 	arrowBox.ontouchmove = event => {
@@ -42,6 +44,7 @@ arrowBox.ontouchstart = event => {
 	}
 }
 
+//Doing staff with dots
 const activeButton = "⚪";
 const inactiveButton = "🔵";
 
@@ -61,6 +64,8 @@ const showPage = id => {
 
 		activeElement.classList.add("hidden");
 		nextElement.classList.remove("hidden");
+
+		document.querySelector("header").scrollIntoView({behavior: "smooth"});
 	}
 }
 
