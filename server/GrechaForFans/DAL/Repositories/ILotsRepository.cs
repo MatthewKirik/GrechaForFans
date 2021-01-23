@@ -10,8 +10,9 @@ namespace DAL.Repositories
 {
     public interface ILotsRepository
     {
-        Task AddLot(LotDto lotData, int shopId);
+        Task<LotDto> AddLot(LotDto lotData, int shopId);
         Task<LotDto> GetLot(int lotId);
+        Task<int?> GetLotId(string link);
         Task<List<LotDto>> GetLots(LotFilter filter);
         Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null);
     }

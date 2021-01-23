@@ -19,7 +19,7 @@ namespace DAL.Repositories.Implementations
             this.mapper = mapper;
         }
 
-        public async Task AddLot(LotDto lotData, int shopId)
+        public async Task<LotDto> AddLot(LotDto lotData, int shopId)
         {
             using (var db = new BuckwheatContext())
             {
@@ -31,6 +31,8 @@ namespace DAL.Repositories.Implementations
 
                 await db.Lots.AddAsync(lot);
                 await db.SaveChangesAsync();
+
+                return mapper.Map<Lot, LotDto>(lot);
             }
         }
 
@@ -68,6 +70,15 @@ namespace DAL.Repositories.Implementations
             {
                 var lot = await db.Lots.FirstOrDefaultAsync(x => x.Id == lotId);
                 return mapper.Map<Lot, LotDto>(lot);
+            }
+        }
+
+        public async Task<int?> GetLotId(string link)
+        {
+            using (var db = new BuckwheatContext())
+            {
+                var lot = await db.Lots.FirstOrDefaultAsync(x => x.Link == link);
+                return lot?.Id;
             }
         }
 

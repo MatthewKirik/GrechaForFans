@@ -31,8 +31,6 @@ namespace API
             services.AddTransient<IPricesService, PricesService>();
             services.AddTransient<IShopsService, ShopsService>();
 
-            services.AddScoped<IParsingService, ParsingService>();
-
             services.AddHostedService<ParsingService>();
 
             services.AddControllers();

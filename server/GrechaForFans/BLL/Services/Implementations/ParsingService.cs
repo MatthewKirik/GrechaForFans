@@ -16,15 +16,19 @@ namespace BLL.Services.Implementations
     public class ParsingService : IParsingService, IHostedService
     {
         IShopsRepository shopsRepository;
+        ILotsService lotsService;
         IConfiguration config;
 
         List<IParser> parsers;
         CancellationTokenSource parsingCancelTokenSource = new CancellationTokenSource();
 
         public ParsingService(IShopsRepository shopsRepository,
+            ILotsRepository lotsRepository,
+            ILotsService lotsService,
             IConfiguration config)
         {
             this.shopsRepository = shopsRepository;
+            this.lotsService = lotsService;
             this.config = config;
             parsers = new List<IParser>();
         }
@@ -52,9 +56,14 @@ namespace BLL.Services.Implementations
 
         private async Task Parse(CancellationToken cancellationToken)
         {
+            int pagesToParse = int.Parse(config["Parsing:PagesToParse"]);
             while (!cancellationToken.IsCancellationRequested)
             {
-                var parsed = await parsers[0].ParseLots(2);
+                foreach (var parser in parsers)
+                {
+                    var parsedLots = await parser.ParseLots(pagesToParse);
+                    await lotsService.UpdateLots(parsedLots);
+                }
             }
         }
 

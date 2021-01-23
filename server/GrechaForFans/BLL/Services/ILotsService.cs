@@ -12,5 +12,6 @@ namespace BLL.Services
         Task<LotDto> GetLot(int lotId);
         Task<List<LotDto>> GetLots(LotFilter filter);
         Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null);
+        Task UpdateLots(List<LotDto> newLots);
     }
 }
