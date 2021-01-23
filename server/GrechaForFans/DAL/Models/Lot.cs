@@ -16,7 +16,6 @@ namespace DAL.Models
         [Required]
         public string Link { get; set; }
 
-        [Required]
         public string Manufacturer { get; set; }
 
         [Required]

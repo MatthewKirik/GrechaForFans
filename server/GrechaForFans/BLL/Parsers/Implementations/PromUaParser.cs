@@ -41,7 +41,7 @@ namespace BLL.Parsers.Implementations
         public async Task<List<LotDto>> ParseLots(int pagesAmount)
         {
             List<LotDto> result = new List<LotDto>();
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 string url = config["Parsing:Addresses:Prom.ua"];
 
@@ -49,7 +49,7 @@ namespace BLL.Parsers.Implementations
                 {
                     string pageUrl = $"{url}&page={i + 1}";
                     webDriver.Navigate().GoToUrl(pageUrl);
-
+                    await Task.Delay(1000);
                     var lotDivs = webDriver.FindElements(By.CssSelector("div[data-company-id]"));
                     foreach (IWebElement lotDiv in lotDivs)
                     {

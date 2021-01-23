@@ -39,7 +39,7 @@ namespace DAL.Repositories.Implementations
         public async Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null)
         {
             toDate ??= DateTime.MaxValue;
-            var limit = filter.Limit <= 50 ? filter.Limit : 50;
+            var limit = (filter.Limit > 0 & filter.Limit <= 50) ? filter.Limit : 50;
 
             using (var db = new BuckwheatContext())
             {
@@ -84,6 +84,7 @@ namespace DAL.Repositories.Implementations
 
         public async Task<List<LotDto>> GetLots(LotFilter filter)
         {
+            var limit = (filter.Limit > 0 & filter.Limit <= 50) ? filter.Limit : 50;
             using (var db = new BuckwheatContext())
             {
                 var lots = db.Lots.AsQueryable();
@@ -91,7 +92,7 @@ namespace DAL.Repositories.Implementations
                     lots = lots.Where(x => x.Shop.Id == filter.ShopId);
                 if (filter.WeightInGrams != null)
                     lots = lots.Where(x => x.WeightInGrams == filter.WeightInGrams);
-                lots = lots.Take(filter.Limit);
+                lots = lots.Take(limit);
                 return mapper.Map<List<Lot>, List<LotDto>>(await lots.ToListAsync());
             }
         }

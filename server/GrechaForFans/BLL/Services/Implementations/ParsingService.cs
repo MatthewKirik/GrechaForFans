@@ -57,6 +57,8 @@ namespace BLL.Services.Implementations
         private async Task Parse(CancellationToken cancellationToken)
         {
             int pagesToParse = int.Parse(config["Parsing:PagesToParse"]);
+            int parsingDelay = int.Parse(config["Parsing:ParsingDelay"]);
+
             while (!cancellationToken.IsCancellationRequested)
             {
                 foreach (var parser in parsers)
@@ -64,6 +66,7 @@ namespace BLL.Services.Implementations
                     var parsedLots = await parser.ParseLots(pagesToParse);
                     await lotsService.UpdateLots(parsedLots);
                 }
+                await Task.Delay(parsingDelay * 1000);
             }
         }
 
