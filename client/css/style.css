@@ -51,24 +51,27 @@ header{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/*background-color: rgb(219, 219, 219);*/
 	width: 20%;
 	height: 100%;
 	padding: 10px 2px;
-	/*border-right: 1px dashed black;*/
 }
 #sorter{
 	width: 95%;
 }
 #filter{
-	
+	width: 100%;
 }
 #filter > *{
 	margin-top: 15px;
 }
-input[type="checkbox"]{
+#weight-filter > p{
+	display: flex;
+	flex-direction: column;
+}
+input[type="text"]{
 	margin-top: 10px;
 	margin-left: 20px;
+	width: 50px;
 }
 #filter-accept{
 
@@ -88,7 +91,6 @@ input[type="checkbox"]{
 	justify-content: center;
 	margin: 2px;
 	height: 100px;
-	/*background-color: blanchedalmond;*/
 	margin-top: 10px;
 }
 .offer img{
