@@ -32,8 +32,14 @@ namespace BLL.Parsers.Implementations
             await Task.Run(() =>
             {
                 var options = new ChromeOptions();
+                options.AddArguments("headless");
+                options.AddArguments("--disable-dev-shm-usage");
+                options.AddArguments("--no-sandbox");
                 var path = Environment.GetEnvironmentVariable("CHROMEDRIVER_DIRECTORY");
-                webDriver = new ChromeDriver(path, options);
+                if(path != null)
+                    webDriver = new ChromeDriver(path, options);
+                else
+                    webDriver = new ChromeDriver(options);
                 this.shop = shop;
                 this.keywordsRegex = keywordsPattern;
 

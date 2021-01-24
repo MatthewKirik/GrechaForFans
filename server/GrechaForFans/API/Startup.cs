@@ -21,6 +21,8 @@ namespace API
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            MigrateDatabase();
+
             services.AddDbContext<DAL.BuckwheatContext>();
 
             services.AddTransient<ILotsRepository, LotsRepository>();
@@ -45,8 +47,6 @@ namespace API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            MigrateDatabase();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

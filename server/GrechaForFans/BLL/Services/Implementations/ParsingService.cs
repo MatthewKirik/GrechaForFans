@@ -24,7 +24,6 @@ namespace BLL.Services.Implementations
         CancellationTokenSource parsingCancelTokenSource = new CancellationTokenSource();
 
         public ParsingService(IShopsRepository shopsRepository,
-            ILotsRepository lotsRepository,
             ILotsService lotsService,
             IConfiguration config)
         {

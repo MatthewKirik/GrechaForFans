@@ -12,7 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "CHROMEDRIVER_DIRECTORY": "C:\\\\chromedriver\\",
+        "CHROMEDRIVER_DIRECTORY": "C:\\",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
