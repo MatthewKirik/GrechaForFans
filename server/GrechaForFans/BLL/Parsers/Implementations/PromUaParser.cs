@@ -36,7 +36,6 @@ namespace BLL.Parsers.Implementations
                 webDriver = new ChromeDriver(path, options);
                 this.shop = shop;
                 this.keywordsRegex = keywordsPattern;
-
             });
         }
 
