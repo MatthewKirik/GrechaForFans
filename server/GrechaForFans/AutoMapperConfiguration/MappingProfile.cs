@@ -14,6 +14,8 @@ namespace AutoMapperConfiguration
             CreateMap<Lot, LotDto>().ReverseMap();
             CreateMap<Price, PriceDto>().ReverseMap();
             CreateMap<Shop, ShopDto>().ReverseMap();
+            CreateMap<double, decimal>().ConvertUsing(d => Convert.ToDecimal(d));
+            CreateMap<decimal, double>().ConvertUsing(d => Convert.ToDouble(d));
         }
     }
 }

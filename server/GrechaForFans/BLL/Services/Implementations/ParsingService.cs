@@ -57,7 +57,7 @@ namespace BLL.Services.Implementations
 
         public Task StartParsing()
         {
-            Parse(parsingCancelTokenSource.Token);
+            //Parse(parsingCancelTokenSource.Token);
             return Task.CompletedTask;
         }
 

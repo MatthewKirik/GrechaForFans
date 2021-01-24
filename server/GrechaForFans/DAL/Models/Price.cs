@@ -11,7 +11,7 @@ namespace DAL.Models
         public DateTime Date { get; set; }
 
         [Required]
-        public decimal Value { get; set; }
+        public double Value { get; set; }
 
         public Lot Lot { get; set; }
     }
