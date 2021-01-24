@@ -44,7 +44,7 @@ arrowBox.ontouchstart = event => {
 	}
 }
 
-//Doing staff with dots
+//doing staff with dots
 const activeButton = "⚪";
 const inactiveButton = "🔵";
 
