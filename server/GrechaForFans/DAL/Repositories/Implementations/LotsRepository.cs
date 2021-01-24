@@ -49,15 +49,15 @@ namespace DAL.Repositories.Implementations
                 if (filter.WeightInGrams != null)
                     lotsQuery = lotsQuery.Where(x => x.WeightInGrams == filter.WeightInGrams);
 
-                var lastPricesQuery = lotsQuery.Select(x =>
+                var lastPricesQuery = lotsQuery.Select(lot =>
                         db.Prices
-                        .Where(x => x.Lot.Id == x.Id && x.Date <= toDate)
-                        .OrderByDescending(x => x.Date)
+                        .Where(p => p.Lot.Id == lot.Id && p.Date <= toDate)
+                        .OrderByDescending(p => p.Date)
                         .FirstOrDefault());
 
                 var cheapestLotsQuery = lastPricesQuery
                     .OrderBy(x => x.Value)
-                    .Take(filter.Limit)
+                    .Take(limit)
                     .Select(x => x.Lot);
 
                 return mapper.Map<List<Lot>, List<LotDto>>(await cheapestLotsQuery.ToListAsync());

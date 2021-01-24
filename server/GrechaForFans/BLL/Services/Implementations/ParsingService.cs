@@ -51,13 +51,13 @@ namespace BLL.Services.Implementations
             var rozetkaParser = new RozetkaParser(config);
             await rozetkaParser.Initialize(rozetkaShop, regex);
 
-            //parsers.Add(promUaParser);
+            parsers.Add(promUaParser);
             parsers.Add(rozetkaParser);
         }
 
         public Task StartParsing()
         {
-            Parse(parsingCancelTokenSource.Token);
+            //Parse(parsingCancelTokenSource.Token);
             return Task.CompletedTask;
         }
 
