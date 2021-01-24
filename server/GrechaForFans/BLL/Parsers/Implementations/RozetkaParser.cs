@@ -63,12 +63,6 @@ namespace BLL.Parsers.Implementations
 
                         if (lot == null) continue;
 
-                        if (lot.ImageLink == badImageLink)
-                        {
-                            lotDivs = webDriver.FindElements(By.CssSelector("div[class=\"goods-tile__inner\"]"));
-                            lot = ParseLot(lotDivs[j]);
-                        }
-
                         result.Add(lot);
                     }
                 }
