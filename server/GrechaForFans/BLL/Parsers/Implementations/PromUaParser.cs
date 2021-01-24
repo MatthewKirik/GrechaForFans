@@ -32,7 +32,7 @@ namespace BLL.Parsers.Implementations
             await Task.Run(() =>
             {
                 var options = new ChromeOptions();
-                webDriver = new ChromeDriver("C:\\Program Files (x86)", options);
+                webDriver = new ChromeDriver(config["PathToDriver"], options);
                 this.shop = shop;
                 this.keywordsRegex = keywordsPattern;
 
@@ -50,7 +50,7 @@ namespace BLL.Parsers.Implementations
                 {
                     string pageUrl = $"{url}&page={i + 1}";
                     webDriver.Navigate().GoToUrl(pageUrl);
-                    await Task.Delay(1000);
+                    await Task.Delay(500);
                     var lotDivs = webDriver.FindElements(By.CssSelector("div[data-company-id]"));
                     foreach (IWebElement lotDiv in lotDivs)
                     {

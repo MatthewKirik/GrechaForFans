@@ -1,6 +1,7 @@
 ﻿using BLL.Parsers;
 using BLL.Parsers.Implementations;
 using DAL.Repositories;
+using DataTransfer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -42,10 +43,17 @@ namespace BLL.Services.Implementations
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
 
             var promUaShop = await shopsRepository.GetShop("Prom.ua");
+            var rozetkaShop = await shopsRepository.GetShop("Rozetka.com.ua");
+
             var promUaParser = new PromUaParser(config);
             await promUaParser.Initialize(promUaShop, regex);
 
+            var rozetkaParser = new RozetkaParser(config);
+            await rozetkaParser.Initialize(rozetkaShop, regex);
+
             parsers.Add(promUaParser);
+            parsers.Add(rozetkaParser);
+            await StartParsing();
         }
 
         public Task StartParsing()
