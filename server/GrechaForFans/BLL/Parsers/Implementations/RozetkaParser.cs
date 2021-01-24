@@ -53,23 +53,39 @@ namespace BLL.Parsers.Implementations
                         break;
 
                     var lotDivs = webDriver.FindElements(By.CssSelector("div[class=\"goods-tile__inner\"]"));
+                    
+                    await ScrollPage();
 
-                    foreach (IWebElement lotDiv in lotDivs)
+                    for (int j = 0; j < lotDivs.Count; j++)
                     {
+                        var lotDiv = lotDivs[j];
                         var lot = ParseLot(lotDiv);
 
                         if (lot == null) continue;
 
                         if (lot.ImageLink == badImageLink)
                         {
-                            webDriver.FindElements(By.CssSelector("div[class=\"goods-tile__inner\"]"));
-                            lot = ParseLot(lotDiv);
+                            lotDivs = webDriver.FindElements(By.CssSelector("div[class=\"goods-tile__inner\"]"));
+                            lot = ParseLot(lotDivs[j]);
                         }
+
                         result.Add(lot);
                     }
                 }
             });
             return result;
+        }
+
+        private async Task ScrollPage()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)webDriver;
+            int height = 0;
+            while (height <= 12800)
+            {
+                js.ExecuteScript("window.scrollTo (0, " + height + ")");
+                height += 500;
+                await Task.Delay(200);
+            }
         }
 
         private LotDto ParseLot(IWebElement lotDiv)
