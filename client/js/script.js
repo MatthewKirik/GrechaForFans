@@ -106,28 +106,32 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
-	//check filters
+	//check filters & sorter
 	const FILTERS = {
-		weight: [],
+		weight: {minWeight: null, maxWeight: null},
 	};
 	const filtersAcceptButton = document.querySelector("#filter-accept");
 	const getFilters = () => {
-		const weightFilters = document.querySelectorAll("#weight-filter > p > input");
+		const minWeightInput = document.querySelector("#minWeight");
+		const maxWeightInput = document.querySelector("#maxWeight");
+
+		FILTERS.weight.minWeight = minWeightInput.value ? +minWeightInput.value : null;
+		FILTERS.weight.maxWeight = maxWeightInput.value ? +maxWeightInput.value : null;
 	}
 
-	//check sorter
 	const sorterButton = document.querySelector("#sorter");
 	sorterButton.reversed = false;
 	sorterButton.onclick = () => {
 		sorterButton.reversed = sorterButton.reversed ? false : true;
 		sorterButton.innerText = sorterButton.reversed ? "Сортувати за ціною: ▲" : "Сортувати за ціною: ▼"
-		displayLots(getData(sorterButton.reversed));
+		displayLots(getData(sorterButton.reversed), FILTERS);
 	}
 
 	filtersAcceptButton.onclick = () => {
-		displayLots(getData(sorterButton.reversed));
+		getFilters();
+		displayLots(getData(sorterButton.reversed, FILTERS));
 	}
 
 	//load initial lots
-	displayLots(getData(), getFilters());
+	displayLots(getData());
 });
