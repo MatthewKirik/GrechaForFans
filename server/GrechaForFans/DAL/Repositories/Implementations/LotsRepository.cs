@@ -58,9 +58,17 @@ namespace DAL.Repositories.Implementations
                 var cheapestLotsQuery = lastPricesQuery
                     .OrderBy(x => x.Value)
                     .Take(limit)
-                    .Select(x => x.Lot);
+                    .Select(x => new { Lot = x.Lot, Price = x });
 
-                return mapper.Map<List<Lot>, List<LotDto>>(await cheapestLotsQuery.ToListAsync());
+                var cheapestLots = await cheapestLotsQuery.ToListAsync();
+                var cheapestLotsDtos = cheapestLots.Select(x =>
+                {
+                    var mapped = mapper.Map<Lot, LotDto>(x.Lot);
+                    mapped.Price = mapper.Map<Price, PriceDto>(x.Price);
+                    return mapped;
+                });
+
+                return cheapestLotsDtos.ToList();
             }
         }
 
