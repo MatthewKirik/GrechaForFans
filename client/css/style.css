@@ -101,7 +101,7 @@ input[type="checkbox"]{
 	max-width: 100%;
 	resize: both;
 }
-#text-area{
+.text-area{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
