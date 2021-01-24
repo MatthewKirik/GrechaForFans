@@ -59,12 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		"shop": "prom",
 		"price": 22,
 		"id": 4
-	}]
+	}];
 	return reversed ? data.reverse() : data;
 }
 
 	//display data
-	const displayLots = (data, filter = false) => {
+	const displayLots = data => {
 		const showLot = lot => {
 			const shopName = lot.shop;
 
@@ -102,21 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		for (let i = 0; i < data.length; i++) {
-			const currentLot = data[i];
-
-			if (!filter || filter(currentLot)){
-				showLot(currentLot);
-			}
+			showLot(data[i]);
 		}
 	}
 
 	//check filters
-	const FILTERS = {};
+	const FILTERS = {
+		weight: [],
+	};
 	const filtersAcceptButton = document.querySelector("#filter-accept");
 	const getFilters = () => {
-		if (Object.keys(FILTERS) > 0) {
-
-		}
+		const weightFilters = document.querySelectorAll("#weight-filter > p > input");
 	}
 
 	//check sorter
@@ -124,9 +120,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	sorterButton.reversed = false;
 	sorterButton.onclick = () => {
 		sorterButton.reversed = sorterButton.reversed ? false : true;
-		sorterButton.innerText = sorterButton.reversed ? "Сортувати за ціною: 🠕" : "Сортувати за ціною: 🠗"
-		displayLots(getData(sorterButton.reversed), getFilters());
+		sorterButton.innerText = sorterButton.reversed ? "Сортувати за ціною: ▲" : "Сортувати за ціною: ▼"
+		displayLots(getData(sorterButton.reversed));
 	}
 
+	filtersAcceptButton.onclick = () => {
+		displayLots(getData(sorterButton.reversed));
+	}
+
+	//load initial lots
 	displayLots(getData(), getFilters());
 });
