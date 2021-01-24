@@ -26,20 +26,10 @@
 				<div id="weight-filter">
 					<h3>Вага: </h3>
 					<p>
-						<input type="checkbox" name="weight>1000g"> >1000г.<br>
-						<input type="checkbox" name="weight1000g"> 1000г.<br>
-						<input type="checkbox" name="weight800g"> 800г.<br>
-						<input type="checkbox" name="weight600g"> 600г.<br>
-						<input type="checkbox" name="weight400g"> 400г.<br>
-						<input type="checkbox" name="weight200g"> 200г.<br>      
-					</p>
-				</div>
-				<div id="producer-filter">
-					<h3>Виробник: </h3>
-					<p>
-						<input type="checkbox" name="Pere"> Pere<br>
-						<input type="checkbox" name="Zhmenka"> Жменька<br>
-						<input type="checkbox" name="Scotti"> Scotti<br>
+						<label for="minWeight">Мінімальна вага:</label>
+						<input type="text" name="minWeight" id="minWeight" placeholder="0">
+						<label for="maxWeight">Максимальна вага:</label>
+						<input type="text" name="maxWeight" id="maxWeight" placeholder="1000">      
 					</p>
 				</div>
 				<button id="filter-accept">Прийняти фільтри</button>
