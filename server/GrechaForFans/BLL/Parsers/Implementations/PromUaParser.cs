@@ -32,7 +32,8 @@ namespace BLL.Parsers.Implementations
             await Task.Run(() =>
             {
                 var options = new ChromeOptions();
-                webDriver = new ChromeDriver(config["PathToDriver"], options);
+                var path = Environment.GetEnvironmentVariable("CHROMEDRIVER_DIRECTORY");
+                webDriver = new ChromeDriver(path, options);
                 this.shop = shop;
                 this.keywordsRegex = keywordsPattern;
 
