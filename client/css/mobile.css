@@ -29,6 +29,7 @@
 	}
 	#arrow-box{
 		user-select: none;
+		cursor: pointer;
 		display: block !important;
 		position: fixed;
 		top: 20vh;
@@ -86,6 +87,10 @@
 		padding-left: 25%;
 		padding-right: 25%;
 		background-color: rgba(240, 240, 240, .9);
+	}
+	.dot{
+		user-select: none;
+		cursor: pointer;
 	}
 	@media (orientation: landscape) {
 		header{
