@@ -53,7 +53,6 @@ namespace BLL.Services.Implementations
 
             //parsers.Add(promUaParser);
             parsers.Add(rozetkaParser);
-            await StartParsing();
         }
 
         public Task StartParsing()

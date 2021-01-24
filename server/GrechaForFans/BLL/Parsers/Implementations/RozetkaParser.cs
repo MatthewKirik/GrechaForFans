@@ -46,11 +46,13 @@ namespace BLL.Parsers.Implementations
                 string url = config["Parsing:Addresses:Rozetka.com.ua"];
                 for (int i = 0; i < pagesAmount; i++)
                 {
-                    string pageUrl = $"{url}&page={i + 1}";
+                    string pageUrl = $"{url};page={i + 1}";
                     webDriver.Navigate().GoToUrl(pageUrl);
                     await Task.Delay(1000);
+                    if (i > 0 && !webDriver.Url.Contains("page"))
+                        break;
+
                     var lotDivs = webDriver.FindElements(By.CssSelector("div[class=\"goods-tile__inner\"]"));
-                    var _lot = ParseLot(lotDivs[0]);
 
                     foreach (IWebElement lotDiv in lotDivs)
                     {
@@ -72,33 +74,40 @@ namespace BLL.Parsers.Implementations
 
         private LotDto ParseLot(IWebElement lotDiv)
         {
-            var a = lotDiv.FindElement(By.CssSelector("a[class=\"goods-tile__picture\"]"));
-            var imgElement = lotDiv.FindElement(By.CssSelector("img"));
-            string title = imgElement.GetAttribute("title");
-            if (!keywordsRegex.IsMatch(title))
-                return null;
-
-            string link = new string(a.GetAttribute("href").TakeWhile(x => x != '?').ToArray());
-            
-            string imgLink = imgElement.GetAttribute("src");
-            string priceStr = lotDiv.FindElement(By.CssSelector("span[class=\"goods-tile__price-value\"]")).Text;
-            decimal price = decimal.Parse(new string(priceStr.TakeWhile(x => Char.IsDigit(x)).ToArray()));
-            int grams = GetGrams(title);
-
-            return new LotDto()
+            try
             {
-                Shop = this.shop,
-                ImageLink = imgLink,
-                Link = link,
-                Manufacturer = null,
-                Title = title,
-                WeightInGrams = grams,
-                Price = new PriceDto()
+                var a = lotDiv.FindElement(By.CssSelector("a[class=\"goods-tile__picture\"]"));
+                var imgElement = lotDiv.FindElement(By.CssSelector("img"));
+                string title = imgElement.GetAttribute("title");
+                if (!keywordsRegex.IsMatch(title))
+                    return null;
+
+                string link = new string(a.GetAttribute("href").TakeWhile(x => x != '?').ToArray());
+
+                string imgLink = imgElement.GetAttribute("src");
+                string priceStr = lotDiv.FindElement(By.CssSelector("span[class=\"goods-tile__price-value\"]")).Text;
+                decimal price = decimal.Parse(new string(priceStr.TakeWhile(x => Char.IsDigit(x)).ToArray()));
+                int grams = GetGrams(title);
+
+                return new LotDto()
                 {
-                    Date = DateTime.Now,
-                    Value = price
-                }
-            };
+                    Shop = this.shop,
+                    ImageLink = imgLink,
+                    Link = link,
+                    Manufacturer = null,
+                    Title = title,
+                    WeightInGrams = grams,
+                    Price = new PriceDto()
+                    {
+                        Date = DateTime.Now,
+                        Value = price
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         private int GetGrams(string str)
