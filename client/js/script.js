@@ -4,6 +4,7 @@ const CONFIG = {
 	API_CHEAPEST_URL: "/api/lots/cheapest",
 	QUERY_PARAMETERS: { reversed: "reversed", minWeight: "fromWeight", maxWeight: "toWeight", limit: "Limit"},
 	API_GET_ERROR_MESSAGE: "Помилка отримання даних",
+	DATA_DONT_EXIST_MESSAGE: "Data don't exists!",
 	LINK_MESSAGE: "Перейти на сайт",
 	FILTERS_TEMPLATE: { weight: {minWeight: null, maxWeight: null}, },
 	SORT_PRICE_UP_MESSAGE: "Сортувати за ціною: ▲",
@@ -33,13 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	const getData = async (reversed = false, filters, limit = 50) => {
 		const url = `${CONFIG.API_CHEAPEST_URL}?${CONFIG.QUERY_PARAMETERS.reversed}=${reversed}&${CONFIG.QUERY_PARAMETERS.minWeight}=${filters.weight.minWeight}&${CONFIG.QUERY_PARAMETERS.maxWeight}=${filters.weight.maxWeight}&${CONFIG.QUERY_PARAMETERS.limit}=${limit}`;
 
-		let response = await fetch(url, {method: "GET"});
+		try {
+			let response = await fetch(url, {method: "GET"});
 
-		if (response.ok) {
-			let json = await response.json();
-			return json;
-		} else {
-			console.error(CONFIG.API_GET_ERROR_MESSAGE + ": " + response.status);
+			if (response.ok) {
+				let json = await response.json();
+				return json;
+			} else {
+				console.error(CONFIG.API_GET_ERROR_MESSAGE + ": " + response.status);
+			}
+		} catch (e) {
+			console.error(e);
 		}
 	}
 
@@ -49,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			const data = res;
 
 			if (!data) {
+				console.warn(CONFIG.DATA_DONT_EXIST_MESSAGE);
 				return false;
 			}
 
