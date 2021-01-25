@@ -20,11 +20,6 @@ namespace API.Controllers
             this.lotsService = lotsService;
         }
 
-        [HttpGet("cheapest")]
-        public async Task<List<LotDto>> GetCheapestLots([FromQuery] LotFilter filter, [FromQuery] DateTime? toDate = null)
-            => await lotsService.GetCheapestLots(filter, toDate);
-
-
         [HttpGet("{lotId}")]
         public async Task<LotDto> GetLot(int lotId)
             => await lotsService.GetLot(lotId);

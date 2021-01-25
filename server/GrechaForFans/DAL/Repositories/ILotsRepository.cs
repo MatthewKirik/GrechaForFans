@@ -14,6 +14,5 @@ namespace DAL.Repositories
         Task<LotDto> GetLot(int lotId);
         Task<int?> GetLotId(string link);
         Task<List<LotDto>> GetLots(LotFilter filter);
-        Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null);
     }
 }

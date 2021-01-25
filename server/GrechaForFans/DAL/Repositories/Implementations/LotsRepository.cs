@@ -36,42 +36,6 @@ namespace DAL.Repositories.Implementations
             }
         }
 
-        public async Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null)
-        {
-            toDate ??= DateTime.MaxValue;
-            var limit = (filter.Limit > 0 & filter.Limit <= 50) ? filter.Limit : 50;
-
-            using (var db = new BuckwheatContext())
-            {
-                var lotsQuery = db.Lots.AsQueryable();
-                if (filter.ShopId != null)
-                    lotsQuery = lotsQuery.Where(x => x.Shop.Id == filter.ShopId);
-                if (filter.WeightInGrams != null)
-                    lotsQuery = lotsQuery.Where(x => x.WeightInGrams == filter.WeightInGrams);
-
-                var lastPricesQuery = lotsQuery.Select(lot =>
-                        db.Prices
-                        .Where(p => p.Lot.Id == lot.Id && p.Date <= toDate)
-                        .OrderByDescending(p => p.Date)
-                        .FirstOrDefault());
-
-                var cheapestLotsQuery = lastPricesQuery
-                    .OrderBy(x => x.Value)
-                    .Take(limit)
-                    .Select(x => new { Lot = x.Lot, Price = x });
-
-                var cheapestLots = await cheapestLotsQuery.ToListAsync();
-                var cheapestLotsDtos = cheapestLots.Select(x =>
-                {
-                    var mapped = mapper.Map<Lot, LotDto>(x.Lot);
-                    mapped.Price = mapper.Map<Price, PriceDto>(x.Price);
-                    return mapped;
-                });
-
-                return cheapestLotsDtos.ToList();
-            }
-        }
-
         public async Task<LotDto> GetLot(int lotId)
         {
             using (var db = new BuckwheatContext())
@@ -89,19 +53,47 @@ namespace DAL.Repositories.Implementations
                 return lot?.Id;
             }
         }
-
         public async Task<List<LotDto>> GetLots(LotFilter filter)
         {
+            var fromDate = filter.FromDate ?? DateTime.MinValue;
+            var toDate = filter.ToDate ?? DateTime.MaxValue;
             var limit = (filter.Limit > 0 & filter.Limit <= 50) ? filter.Limit : 50;
+
             using (var db = new BuckwheatContext())
             {
-                var lots = db.Lots.AsQueryable();
-                if (filter.ShopId != null) 
-                    lots = lots.Where(x => x.Shop.Id == filter.ShopId);
-                if (filter.WeightInGrams != null)
-                    lots = lots.Where(x => x.WeightInGrams == filter.WeightInGrams);
-                lots = lots.Take(limit);
-                return mapper.Map<List<Lot>, List<LotDto>>(await lots.ToListAsync());
+                var lotsQuery = db.Lots.AsQueryable();
+                if (filter.ShopId != null)
+                    lotsQuery = lotsQuery.Where(x => x.Shop.Id == filter.ShopId);
+                if (filter.FromWeight != null)
+                    lotsQuery = lotsQuery.Where(x => x.WeightInGrams >= filter.FromWeight);
+                if (filter.ToWeight != null)
+                    lotsQuery = lotsQuery.Where(x => x.WeightInGrams <= filter.ToWeight);
+
+                var lastPricesQuery = lotsQuery.Select(lot =>
+                        db.Prices
+                        .Where(p => p.Lot.Id == lot.Id && p.Date >= fromDate && p.Date <= toDate)
+                        .OrderByDescending(p => p.Date)
+                        .FirstOrDefault());
+
+                var orderedPricesQuery = lastPricesQuery;
+                if (filter.Order == "expensive")
+                    orderedPricesQuery = orderedPricesQuery.OrderByDescending(x => x.Value);
+                else if(filter.Order == "cheap")
+                    orderedPricesQuery = orderedPricesQuery.OrderBy(x => x.Value);
+
+                var oredredLotsQuery = orderedPricesQuery
+                    .Take(limit)
+                    .Select(x => new { Lot = x.Lot, Price = x });
+
+                var orderedLots = await oredredLotsQuery.ToListAsync();
+                var orderedLotsDtos = orderedLots.Select(x =>
+                {
+                    var mapped = mapper.Map<Lot, LotDto>(x.Lot);
+                    mapped.Price = mapper.Map<Price, PriceDto>(x.Price);
+                    return mapped;
+                });
+
+                return orderedLotsDtos.ToList();
             }
         }
     }

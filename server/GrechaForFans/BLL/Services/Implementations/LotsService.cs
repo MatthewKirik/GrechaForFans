@@ -38,9 +38,6 @@ namespace BLL.Services.Implementations
 
         }
 
-        public Task<List<LotDto>> GetCheapestLots(LotFilter filter, DateTime? toDate = null)
-            => lotsRepository.GetCheapestLots(filter, toDate);
-
         public Task<LotDto> GetLot(int lotId)
             => lotsRepository.GetLot(lotId);
 
