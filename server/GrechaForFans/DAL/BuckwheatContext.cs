@@ -34,7 +34,11 @@ namespace DAL
                 .WithMany(x => x.Lots);
 
             modelBuilder.Entity<Shop>()
-                .HasData(new Shop() { Id = 1, Name = "Prom.ua" });
+                .HasData(new Shop() { Id = 1, Name = "Prom" });
+            modelBuilder.Entity<Shop>()
+                .HasData(new Shop() { Id = 2, Name = "Rozetka" });
+            modelBuilder.Entity<Shop>()
+                .HasData(new Shop() { Id = 3, Name = "Prom" });
 
             base.OnModelCreating(modelBuilder);
 

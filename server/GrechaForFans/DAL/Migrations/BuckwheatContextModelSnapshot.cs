@@ -90,7 +90,17 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Prom.ua"
+                            Name = "Prom"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Rozetka"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Prom"
                         });
                 });
 

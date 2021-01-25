@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BuckwheatContext))]
-    [Migration("20210121181901_seed-test-data")]
-    partial class seedtestdata
+    [Migration("20210125205139_AddInitialShopData")]
+    partial class AddInitialShopData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,6 @@ namespace DAL.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Manufacturer")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ShopId")
@@ -65,8 +64,8 @@ namespace DAL.Migrations
                     b.Property<int?>("LotId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Value")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Value")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
@@ -93,7 +92,17 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Prom.ua"
+                            Name = "Prom"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Rozetka"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Prom"
                         });
                 });
 
