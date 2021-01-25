@@ -16,6 +16,9 @@ li{
 	text-decoration: none;
 	list-style: none;
 }
+button{
+	cursor: pointer;
+}
 header{
 	display: block;
 	width: 100%;
@@ -115,7 +118,7 @@ input[type="text"]{
 #offers{
 	display: flex;
 	justify-content: space-around;
-	width: 87%;
+	width: 100%;
 	/*padding-top: 3%;*/
 	padding-left: 1%;
 	padding-right: 1%;
@@ -124,6 +127,7 @@ input[type="text"]{
 	width: 33%;
 }
 .offer{
+	width: 100%;
 	transition: 0.2s;
 	justify-content: center;
 	background-attachment: fixed;
@@ -142,6 +146,7 @@ input[type="text"]{
 
 .offer, .company-logo{
 	display:flex;
+	justify-content: center;
 	margin: 2px;
 	height: 100px;
 	margin-top: 10px;
@@ -152,6 +157,7 @@ input[type="text"]{
 	max-height: 100%;
 	min-height: 100%;
 	resize: both;
+	margin: 0 auto;
 }
 .company-logo img{
 	max-width: 100%;

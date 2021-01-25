@@ -69,12 +69,10 @@
 		resize: both;
 	}
 	.offer{
-		width: 100%;
 		margin-top: 20px;
 	}
 	.offer img{
 		max-width: 50%;
-		margin: 0 auto;
 	}
 	#text-area{
 	}
