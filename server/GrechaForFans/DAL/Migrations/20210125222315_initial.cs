@@ -29,7 +29,7 @@ namespace DAL.Migrations
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     ImageLink = table.Column<string>(type: "TEXT", nullable: false),
                     Link = table.Column<string>(type: "TEXT", nullable: false),
-                    Manufacturer = table.Column<string>(type: "TEXT", nullable: false),
+                    Manufacturer = table.Column<string>(type: "TEXT", nullable: true),
                     WeightInGrams = table.Column<int>(type: "INTEGER", nullable: false),
                     ShopId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -51,7 +51,7 @@ namespace DAL.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Value = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Value = table.Column<double>(type: "REAL", nullable: false),
                     LotId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -64,6 +64,21 @@ namespace DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Shops",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Prom" });
+
+            migrationBuilder.InsertData(
+                table: "Shops",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "Rozetka" });
+
+            migrationBuilder.InsertData(
+                table: "Shops",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "Epicentr" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lots_ShopId",

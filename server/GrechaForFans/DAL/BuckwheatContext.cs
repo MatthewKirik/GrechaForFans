@@ -22,7 +22,14 @@ namespace DAL
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             var connectionString = Environment.GetEnvironmentVariable("buckweat.connectionstring");
-            options.UseSqlite(connectionString ?? "Data Source=buckwheat.db");
+            if(connectionString == null)
+            {
+                string path =
+                    System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "db");
+                System.IO.Directory.CreateDirectory(path);
+                connectionString = $"Data Source={System.IO.Path.Combine(path, "buckweat.db")}";
+            }
+            options.UseSqlite(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

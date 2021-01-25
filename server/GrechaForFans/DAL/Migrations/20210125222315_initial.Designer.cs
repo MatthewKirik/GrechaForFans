@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BuckwheatContext))]
-    [Migration("20210124131107_doublePriceValue")]
-    partial class doublePriceValue
+    [Migration("20210125222315_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,7 +92,17 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Prom.ua"
+                            Name = "Prom"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Rozetka"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Epicentr"
                         });
                 });
 

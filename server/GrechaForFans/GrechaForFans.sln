@@ -5,15 +5,20 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{AB59E684-B9F2-4EF3-8EBB-AA24A2759DEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{920CDA53-10D2-4F80-8ABC-FCFCA3637939}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{920CDA53-10D2-4F80-8ABC-FCFCA3637939}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{6A11B1AC-D1D2-4A29-AA0E-F8D4A5A8D4DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{6A11B1AC-D1D2-4A29-AA0E-F8D4A5A8D4DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransfer", "DataTransfer\DataTransfer.csproj", "{8E32822E-C315-4E5D-992D-1FABE62B9B90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTransfer", "DataTransfer\DataTransfer.csproj", "{8E32822E-C315-4E5D-992D-1FABE62B9B90}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{C32E1B80-B7FB-4E0F-9B66-53740C0AAB4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperConfiguration", "AutoMapperConfiguration\AutoMapperConfiguration.csproj", "{16251C50-B2C4-4402-8410-C91C953E471A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoMapperConfiguration", "AutoMapperConfiguration\AutoMapperConfiguration.csproj", "{16251C50-B2C4-4402-8410-C91C953E471A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{98DEABEC-5CC1-4400-8903-9904AC88AFDE}"
+	ProjectSection(SolutionItems) = preProject
+		test-requests.rest = test-requests.rest
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
