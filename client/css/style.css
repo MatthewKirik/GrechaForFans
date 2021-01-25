@@ -96,13 +96,10 @@ input[type="text"]{
 	font-family: 'Roboto Slab', serif;
 	font-size :16;
 }
-
 #text-area a{
 	padding: 2px;
-	font-size: 20px;
-	
+	font-size: 20px;	
 }
-
 @media (max-width: 1220px){
 	#price{
 		font-size: 16px;
@@ -143,7 +140,6 @@ input[type="text"]{
 	box-shadow: 0px 0px 6px rgb(119, 119, 119);
 	border-bottom:1px solid white;
 }
-
 .offer, .company-logo{
 	display:flex;
 	justify-content: center;
