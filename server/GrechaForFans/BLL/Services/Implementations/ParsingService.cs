@@ -67,21 +67,26 @@ namespace BLL.Services.Implementations
             return Task.CompletedTask;
         }
 
-        private async Task Parse(CancellationToken cancellationToken)
+        private async void Parse(CancellationToken cancellationToken)
         {
             int pagesToParse = int.Parse(config["Parsing:PagesToParse"]);
             int parsingDelay = int.Parse(config["Parsing:ParsingDelay"]);
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                foreach (var parser in parsers)
-                {
-                    var parsedLots = await parser.ParseLots(pagesToParse);
-                    await lotsService.UpdateLots(parsedLots);
-                }
-                await Task.Delay(parsingDelay * 1000);
+                var tasks = parsers
+                    .Select(x => ParseAndUpdate(x, pagesToParse));
+                await Task.WhenAll(tasks);
             }
+            await Task.Delay(parsingDelay * 1000);
         }
+
+        private async Task ParseAndUpdate(IParser parser, int pagesToParse)
+        {
+            var parsedLots = await parser.ParseLots(pagesToParse);
+            await lotsService.UpdateLots(parsedLots);
+        }
+
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
