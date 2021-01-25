@@ -1,8 +1,8 @@
 'use strict';
 const CONFIG = {
 	MOBILE_SCRIPT_PATH: "js/mobile.js",
-	API_CHEAPEST_URL: "/api/lots/cheapest",
-	QUERY_PARAMETERS: { reversed: "reversed", minWeight: "fromWeight", maxWeight: "toWeight", limit: "Limit"},
+	API_CHEAPEST_URL: "/api/lots/",
+	QUERY_PARAMETERS: { reversed: "order", minWeight: "fromWeight", maxWeight: "toWeight", limit: "limit"},
 	API_GET_ERROR_MESSAGE: "Помилка отримання даних",
 	DATA_DONT_EXIST_MESSAGE: "Data don't exists!",
 	LINK_MESSAGE: "Перейти на сайт",
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	//request data from server
 	const getData = async (reversed = false, filters, limit = 50) => {
-		const url = `${CONFIG.API_CHEAPEST_URL}?${CONFIG.QUERY_PARAMETERS.reversed}=${reversed}&${CONFIG.QUERY_PARAMETERS.minWeight}=${filters.weight.minWeight}&${CONFIG.QUERY_PARAMETERS.maxWeight}=${filters.weight.maxWeight}&${CONFIG.QUERY_PARAMETERS.limit}=${limit}`;
+		const url = `${CONFIG.API_CHEAPEST_URL}?${CONFIG.QUERY_PARAMETERS.reversed}=${reversed ? "expensive" : "cheap"}&${CONFIG.QUERY_PARAMETERS.minWeight}=${filters.weight.minWeight}&${CONFIG.QUERY_PARAMETERS.maxWeight}=${filters.weight.maxWeight}&${CONFIG.QUERY_PARAMETERS.limit}=${limit}`;
 
 		try {
 			let response = await fetch(url, {method: "GET"});
