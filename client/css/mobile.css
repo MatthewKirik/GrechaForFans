@@ -59,7 +59,7 @@
 		padding-top: 20px;
 		align-items: center;
 		justify-content: center;
-		padding-bottom: 70px; 
+		margin-bottom: 70px; 
 	}
 	.company-logo{
 		display: contents;
@@ -103,6 +103,15 @@
 		}
 		#content{
 			min-height: 85vw;
+		}
+		#menu-block{
+			height: 80vh;
+			justify-content: space-around;
+		}
+		#menu-block *{
+			justify-content: space-between;
+			padding: 0;
+			margin: 0;
 		}
 	}
 }
