@@ -18,92 +18,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 	//request data from server
-	const getData = (reversed = false) => {
-		const data = [
-	{
-		"title": "Ïðåì³ÿ. Êðóïà Ïðåì³ÿ ãðå÷íåâàÿ ÿäðèöà áûñòðîðîçâàðèâàåìàÿ 400 ã (4823096405322)",
-		"imageLink": "https://images.ua.prom.st/1935734351_w200_h200_premiya-krupa-premiya.jpg",
-		"link": "https://prom.ua/p1025770411-premiya-krupa-premiya.html",
-		"manufacturer": null,
-		"weightInGrams": 400,
-		"shop": "epicentr",
-		"price": 13,
-		"id": 3
-	},
-	{
-		"title": "Êðóïà ãðå÷íåâàÿ, 212 ã",
-		"imageLink": "https://images.ua.prom.st/910711515_w200_h200_krupa-grechnevaya-212.jpg",
-		"link": "https://prom.ua/p585461881-krupa-grechnevaya-212.html",
-		"manufacturer": null,
-		"weightInGrams": 212,
-		"shop": "rozetka",
-		"price": 14,
-		"id": 2
-	},
+	const getData = async (reversed = false, filters) => {
+		const url = `/example.json`;
 
-	{	"title": "Êðóïà ãðå÷íåâàÿ, 212 ã",
-		"imageLink": "https://images.ua.prom.st/2683272104_w200_h200_krupa-grechnevaya-212.jpg",
-		"link": "https://prom.ua/p1280075973-krupa-grechnevaya-212.html",
-		"manufacturer": "Жменька",
-		"weightInGrams": 212,
-		"shop": "prom",
-		"price": 21,
-		"id": 1
-	},
-	{
-		"title": "Îë³ìï. Êðóïà Îë³ìï Ãðå÷íåâàÿ ßäðèöà 400ã (4820055940443)",
-		"imageLink": "https://images.ua.prom.st/1935734349_w200_h200_olimp-krupa-olimp.jpg",
-		"link": "https://prom.ua/p1025770405-olimp-krupa-olimp.html",
-		"manufacturer": null,
-		"weightInGrams": 400,
-		"shop": "prom",
-		"price": 22,
-		"id": 4
-	}];
-	return reversed ? data.reverse() : data;
-}
+		let response = await fetch(url, {method: "GET"});
+
+		if (response.ok) {
+			let json = await response.json();
+			return json;
+		} else {
+			alert("Ошибка HTTP: " + response.status);
+		}
+	}
 
 	//display data
-	const displayLots = data => {
-		const showLot = lot => {
-			const shopName = lot.shop;
+	const displayLots = promise => {
+		promise.then(res => {
+			const data = res;
 
-			const shopElement 	= 	document.querySelector(`.offer-block[id="${shopName}-offers"]`);
-			const offer 		= 	document.createElement("div"								  );
-			const offerImage 	= 	document.createElement("img"								  );
-			const textArea 		= 	document.createElement("div"								  );
-			const title 		= 	document.createElement("h4"									  );
-			const price 		= 	document.createElement("p"									  );
-			const link 			= 	document.createElement("a"									  );
+			const showLot = lot => {
+				const shopName = lot.shop;
 
-			offer.classList.add("offer");
-			textArea.classList.add("text-area");
-			title.id = "title";
-			price.id = "price";
+				const shopElement 	= 	document.querySelector(`.offer-block[id="${shopName}-offers"]`);
+				const offer 		= 	document.createElement("div"								  );
+				const offerImage 	= 	document.createElement("img"								  );
+				const textArea 		= 	document.createElement("div"								  );
+				const title 		= 	document.createElement("h4"									  );
+				const price 		= 	document.createElement("p"									  );
+				const link 			= 	document.createElement("a"									  );
 
-			Object.assign(offer, lot);
+				offer.classList.add("offer");
+				textArea.classList.add("text-area");
+				title.id = "title";
+				price.id = "price";
 
-			offerImage.src = offer.imageLink;
-			title.innerText = offer.title;
-			price.innerText = offer.price + ` грн/${offer.weightInGrams}г`;
-			link.href = offer.link;
-			link.innerText = "Перейти на сайт";
+				Object.assign(offer, lot);
 
-			textArea.append(title, price, link);
-			offer.append(offerImage, textArea);
-			shopElement.append(offer);
-		}
+				offerImage.src = offer.imageLink;
+				title.innerText = offer.title;
+				price.innerText = offer.price + ` грн/${offer.weightInGrams}г`;
+				link.href = offer.link;
+				link.innerText = "Перейти на сайт";
 
-		const shopOffers = document.querySelectorAll(".offer");
+				textArea.append(title, price, link);
+				offer.append(offerImage, textArea);
+				shopElement.append(offer);
+			}
 
-		//make offer-block clear
-		shopOffers.forEach(el => {
-			el.remove();
+			const shopOffers = document.querySelectorAll(".offer");
+
+			//make offer-block clear
+			shopOffers.forEach(el => {
+				el.remove();
+			});
+
+			//fulfill with data
+			for (let i = 0; i < data.length; i++) {
+				showLot(data[i]);
+			}
 		});
-
-		for (let i = 0; i < data.length; i++) {
-			showLot(data[i]);
-		}
 	}
 
 	//check filters & sorter
