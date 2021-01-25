@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 
 			const showLot = lot => {
-				const shopName = lot.shop;
+				const shopName = lot.shop.name;
 
 				const shopElement 	= 	document.querySelector(`.offer-block[id="${shopName}-offers"]`);
 				const offer 		= 	document.createElement("div"								  );
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				offerImage.src = offer.imageLink;
 				title.innerText = offer.title;
-				price.innerText = `${offer.price} грн/${offer.weightInGrams}г`;
+				price.innerText = `${offer.price.value} грн/${offer.weightInGrams}г`;
 				link.href = offer.link;
 				link.innerText = CONFIG.LINK_MESSAGE;
 
