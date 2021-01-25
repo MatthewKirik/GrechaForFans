@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 	//request data from server
-	const getData = async (reversed = false, filters) => {
-		const url = `/example.json`;
+	const getData = async (reversed = false, filters, limit = 50) => {
+		const url = `/api/lots/cheapest?reversed=${reversed}&fromWeight=${filters.weight.minWeight}&toWeight=${filters.weight.maxWeight}&Limit=${limit}`;
 
 		let response = await fetch(url, {method: "GET"});
 
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	sorterButton.onclick = () => {
 		sorterButton.reversed = sorterButton.reversed ? false : true;
 		sorterButton.innerText = sorterButton.reversed ? "Сортувати за ціною: ▲" : "Сортувати за ціною: ▼"
-		displayLots(getData(sorterButton.reversed), FILTERS);
+		displayLots(getData(sorterButton.reversed, FILTERS));
 	}
 
 	filtersAcceptButton.onclick = () => {
