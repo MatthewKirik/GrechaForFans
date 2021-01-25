@@ -70,7 +70,7 @@ input[type="text"]{
 	margin-left: 20px;
 	width: 50px;
 }
-#filter-accept{
+#filter-accept, #sorter{
 	transition: 0.3s;
 	background-color: #ffffff;
 	border: 2px solid rgb(46, 199, 46);
@@ -80,7 +80,7 @@ input[type="text"]{
 	padding: 1px 2px;
 	box-shadow: 0 0px 4px #999;
 }
-#filter-accept:hover{
+#filter-accept:hover, #sorter:hover{
 	background-color:rgb(46, 199, 46);
 	color: #ffffff;
 }
