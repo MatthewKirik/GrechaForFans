@@ -38,7 +38,7 @@ namespace DAL
             modelBuilder.Entity<Shop>()
                 .HasData(new Shop() { Id = 2, Name = "Rozetka" });
             modelBuilder.Entity<Shop>()
-                .HasData(new Shop() { Id = 3, Name = "Prom" });
+                .HasData(new Shop() { Id = 3, Name = "Epicentr" });
 
             base.OnModelCreating(modelBuilder);
 
