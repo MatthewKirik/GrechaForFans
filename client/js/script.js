@@ -1,5 +1,8 @@
 'use strict';
 document.addEventListener("DOMContentLoaded", () => {
+	import { config } from "./config.js";
+	console.log(config.message);
+
 	//include mobile.js if needed
 	const include = url => {
 		const script = document.createElement('script');
