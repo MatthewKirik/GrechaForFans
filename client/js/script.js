@@ -1,7 +1,16 @@
 'use strict';
+const CONFIG = {
+	MOBILE_SCRIPT_PATH: "js/mobile.js",
+	API_CHEAPEST_URL: "/api/lots/cheapest",
+	QUERY_PARAMETERS: { reversed: "reversed", minWeight: "fromWeight", maxWeight: "toWeight", limit: "Limit"},
+	API_GET_ERROR_MESSAGE: "Помилка отримання даних",
+	LINK_MESSAGE: "Перейти на сайт",
+	FILTERS_TEMPLATE: { weight: {minWeight: null, maxWeight: null}, },
+	SORT_PRICE_UP_MESSAGE: "Сортувати за ціною: ▲",
+	SORT_PRICE_DOWN_MESSAGE: "Сортувати за ціною: ▼", 
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-	import { config } from "./config.js";
-	console.log(config.message);
 
 	//include mobile.js if needed
 	const include = url => {
@@ -11,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	if(window.innerWidth < 1023) {
-		include("js/mobile.js");
+		include(CONFIG.MOBILE_SCRIPT_PATH);
 	}
 
 	//reload page on resize for re-enumarating parameters in mobile.js
@@ -22,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	//request data from server
 	const getData = async (reversed = false, filters, limit = 50) => {
-		const url = `/api/lots/cheapest?reversed=${reversed}&fromWeight=${filters.weight.minWeight}&toWeight=${filters.weight.maxWeight}&Limit=${limit}`;
+		const url = `${CONFIG.API_CHEAPEST_URL}?${CONFIG.QUERY_PARAMETERS.reversed}=${reversed}&${CONFIG.QUERY_PARAMETERS.minWeight}=${filters.weight.minWeight}&${CONFIG.QUERY_PARAMETERS.maxWeight}=${filters.weight.maxWeight}&${CONFIG.QUERY_PARAMETERS.limit}=${limit}`;
 
 		let response = await fetch(url, {method: "GET"});
 
@@ -30,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			let json = await response.json();
 			return json;
 		} else {
-			alert("Ошибка HTTP: " + response.status);
+			console.error(CONFIG.API_GET_ERROR_MESSAGE + ": " + response.status);
 		}
 	}
 
@@ -38,6 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	const displayLots = promise => {
 		promise.then(res => {
 			const data = res;
+
+			if (!data) {
+				return false;
+			}
 
 			const showLot = lot => {
 				const shopName = lot.shop;
@@ -59,9 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				offerImage.src = offer.imageLink;
 				title.innerText = offer.title;
-				price.innerText = offer.price + ` грн/${offer.weightInGrams}г`;
+				price.innerText = `${offer.price} грн/${offer.weightInGrams}г`;
 				link.href = offer.link;
-				link.innerText = "Перейти на сайт";
+				link.innerText = CONFIG.LINK_MESSAGE;
 
 				textArea.append(title, price, link);
 				offer.append(offerImage, textArea);
@@ -83,9 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	//check filters & sorter
-	const FILTERS = {
-		weight: {minWeight: null, maxWeight: null},
-	};
+	const FILTERS = CONFIG.FILTERS_TEMPLATE;
 	const filtersAcceptButton = document.querySelector("#filter-accept");
 	const getFilters = () => {
 		const minWeightInput = document.querySelector("#minWeight");
@@ -99,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	sorterButton.reversed = false;
 	sorterButton.onclick = () => {
 		sorterButton.reversed = sorterButton.reversed ? false : true;
-		sorterButton.innerText = sorterButton.reversed ? "Сортувати за ціною: ▲" : "Сортувати за ціною: ▼"
+		sorterButton.innerText = sorterButton.reversed ? CONFIG.SORT_PRICE_UP_MESSAGE : CONFIG.SORT_PRICE_DOWN_MESSAGE;
 		displayLots(getData(sorterButton.reversed, FILTERS));
 	}
 
@@ -109,5 +120,5 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	//load initial lots
-	displayLots(getData());
+	displayLots(getData(sorterButton.reversed, FILTERS));
 });
