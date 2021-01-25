@@ -61,6 +61,15 @@
 		justify-content: center;
 		padding-bottom: 70px; 
 	}
+	#price{
+		font-size: 24px;
+	}
+	#text-area a{
+		font-size: 20px;
+	}
+	#name{
+		font-size :16px;
+	}
 	.offer{
 		width: auto;
 		margin-top: 20px;
