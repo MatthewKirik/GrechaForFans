@@ -12,9 +12,6 @@ html, body{
 a{
 	text-decoration: none;
 }
-img{
-	border-radius: 5%;
-}
 li{
 	text-decoration: none;
 	list-style: none;
@@ -73,27 +70,84 @@ input[type="text"]{
 	margin-left: 20px;
 	width: 50px;
 }
-#filter-accept{
+#filter-accept, #sorter{
+	transition: 0.3s;
+	background-color: #ffffff;
+	border: 2px solid rgb(46, 199, 46);
+	color: rgb(0, 0, 0);
+	text-align: center;
+	font-size: 16px;
+	padding: 1px 2px;
+	box-shadow: 0 0px 4px #999;
+	border-radius: 5px;
+}
+#filter-accept:hover, #sorter:hover{
+	background-color:rgb(46, 199, 46);
+	color: #ffffff;
+}
+#price{
+	font-family: 'Yusei Magic', sans-serif;
+	font-size: 24px;
+}
+#name{
+	font-family: 'Roboto Slab', serif;
+	font-size :16;
+}
+
+#text-area a{
+	padding: 2px;
+	font-size: 20px;
+	
+}
+
+@media (max-width: 1220px){
+	#price{
+		font-size: 16px;
+	}
+	#name{
+		font-size :12px;
+	}
+	#text-area a{
+		font-size: 16px;
+	}
 
 }
 #offers{
 	display: flex;
 	justify-content: space-around;
 	width: 87%;
-	padding-top: 3%;
+	/*padding-top: 3%;*/
 	padding-left: 1%;
+	padding-right: 1%;
 }
 .offer-block{
 	width: 33%;
 }
+.offer{
+	transition: 0.2s;
+	justify-content: center;
+	background-attachment: fixed;
+	/*background-color:  rgba(189, 229, 252, 0.4);*/
+	box-shadow: 0px 0px 0px rgb(119, 119, 119);
+	padding-bottom:2px;
+	border-bottom:1px solid gray;
+}
+.offer:hover{
+	transition: 0.3s;
+	/*background-color: rgba(189, 229, 252, 0.7);*/
+	border-radius: 10px;
+	box-shadow: 0px 0px 6px rgb(119, 119, 119);
+	border-bottom:1px solid white;
+}
+
 .offer, .company-logo{
 	display:flex;
-	justify-content: center;
 	margin: 2px;
 	height: 100px;
 	margin-top: 10px;
 }
 .offer img{
+	border-radius: 5%;
 	max-width: 80%;
 	max-height: 100%;
 	min-height: 100%;
