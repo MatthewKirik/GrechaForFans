@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Parsers.Implementations
 {
-    class RozetkaParser : IParser, IDisposable
+    class EpicentrParser: IParser, IDisposable
     {
         private IWebDriver webDriver;
         private Microsoft.Extensions.Configuration.IConfiguration config;
@@ -19,8 +19,8 @@ namespace BLL.Parsers.Implementations
         private Regex kilogramsRegex = new Regex("\\d+\\s*(кг)", RegexOptions.IgnoreCase);
         private Regex gramsRegex = new Regex("\\d+\\s*(г)", RegexOptions.IgnoreCase);
         private bool disposedValue;
-        
-        public RozetkaParser(Microsoft.Extensions.Configuration.IConfiguration config)
+
+        public EpicentrParser(Microsoft.Extensions.Configuration.IConfiguration config)
         {
             this.config = config;
         }
@@ -33,7 +33,6 @@ namespace BLL.Parsers.Implementations
                 webDriver = new ChromeDriver(Environment.GetEnvironmentVariable("CHROMEDRIVER_DIRECTORY"), options);
                 this.shop = shop;
                 this.keywordsRegex = keywordsPattern;
-
             });
         }
 
@@ -42,29 +41,24 @@ namespace BLL.Parsers.Implementations
             List<LotDto> result = new List<LotDto>();
             await Task.Run(async () =>
             {
-                string url = config["Parsing:Addresses:Rozetka.com.ua"];
-                for (int i = 0; i < pagesAmount; i++)
+                string url = config["Parsing:Addresses:Epicentr.ua"];
+
+                string pageUrl = url;
+                webDriver.Navigate().GoToUrl(pageUrl);
+                await Task.Delay(1000);
+
+
+                var lotDivs = webDriver.FindElements(By.CssSelector("div[class=\"columns product-Wrap card-wrapper  \"]"));
+                for (int j = 0; j < lotDivs.Count; j++)
                 {
-                    string pageUrl = $"{url};page={i + 1}";
-                    webDriver.Navigate().GoToUrl(pageUrl);
-                    await Task.Delay(1000);
-                    if (i > 0 && !webDriver.Url.Contains("page"))
-                        break;
+                    var lotDiv = lotDivs[j];
+                    var lot = ParseLot(lotDiv);
 
-                    var lotDivs = webDriver.FindElements(By.CssSelector("div[class=\"goods-tile__inner\"]"));
-                    
-                    await ScrollPage();
+                    if (lot == null) continue;
 
-                    for (int j = 0; j < lotDivs.Count; j++)
-                    {
-                        var lotDiv = lotDivs[j];
-                        var lot = ParseLot(lotDiv);
-
-                        if (lot == null) continue;
-
-                        result.Add(lot);
-                    }
+                    result.Add(lot);
                 }
+
             });
             return result;
         }
@@ -85,7 +79,7 @@ namespace BLL.Parsers.Implementations
         {
             try
             {
-                var a = lotDiv.FindElement(By.CssSelector("a[class=\"goods-tile__picture\"]"));
+                var a = lotDiv.FindElement(By.CssSelector("a[class=\"card__photo\"]"));
                 var imgElement = lotDiv.FindElement(By.CssSelector("img"));
                 string title = imgElement.GetAttribute("title");
                 if (!keywordsRegex.IsMatch(title))
@@ -94,7 +88,7 @@ namespace BLL.Parsers.Implementations
                 string link = new string(a.GetAttribute("href").TakeWhile(x => x != '?').ToArray());
 
                 string imgLink = imgElement.GetAttribute("src");
-                string priceStr = lotDiv.FindElement(By.CssSelector("span[class=\"goods-tile__price-value\"]")).Text;
+                string priceStr = lotDiv.FindElement(By.CssSelector("span[class=\"card__price-sum\"]")).Text;
                 decimal price = decimal.Parse(new string(priceStr.TakeWhile(x => Char.IsDigit(x)).ToArray()));
                 int grams = GetGrams(title);
 

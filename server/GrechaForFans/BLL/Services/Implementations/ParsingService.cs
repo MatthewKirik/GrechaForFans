@@ -42,8 +42,11 @@ namespace BLL.Services.Implementations
             pattern = pattern.Remove(pattern.Length - 1);
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
 
+            ShopDto shopDto = new ShopDto();
+
             var promUaShop = await shopsRepository.GetShop("Prom.ua");
             var rozetkaShop = await shopsRepository.GetShop("Rozetka.com.ua");
+            var epicentrShop = await shopsRepository.GetShop("Epicentr.ua");
 
             var promUaParser = new PromUaParser(config);
             await promUaParser.Initialize(promUaShop, regex);
@@ -51,13 +54,17 @@ namespace BLL.Services.Implementations
             var rozetkaParser = new RozetkaParser(config);
             await rozetkaParser.Initialize(rozetkaShop, regex);
 
+            var epicentrParser = new EpicentrParser(config);
+            await epicentrParser.Initialize(epicentrShop, regex);
+
             parsers.Add(promUaParser);
             parsers.Add(rozetkaParser);
+            parsers.Add(epicentrParser);
         }
 
         public Task StartParsing()
         {
-            //Parse(parsingCancelTokenSource.Token);
+            Parse(parsingCancelTokenSource.Token);
             return Task.CompletedTask;
         }
 
