@@ -43,9 +43,9 @@ namespace BLL.Services.Implementations
 
             ShopDto shopDto = new ShopDto();
 
-            var promUaShop = await shopsRepository.GetShop("Prom.ua");
-            var rozetkaShop = await shopsRepository.GetShop("Rozetka.com.ua");
-            var epicentrShop = await shopsRepository.GetShop("Epicentr.ua");
+            var promUaShop = await shopsRepository.GetShop("Prom");
+            var rozetkaShop = await shopsRepository.GetShop("Rozetka");
+            var epicentrShop = await shopsRepository.GetShop("Epicentr");
 
             var promUaParser = new PromUaParser(config);
             await promUaParser.Initialize(promUaShop, regex);
