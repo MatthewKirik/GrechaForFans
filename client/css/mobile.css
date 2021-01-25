@@ -61,8 +61,22 @@
 		justify-content: center;
 		padding-bottom: 70px; 
 	}
-	#price{
-		font-size: 24px;
+	.company-logo{
+		display: contents;
+	}
+	.company-logo img{
+		max-width: 75%;
+		resize: both;
+	}
+	.offer{
+		width: 100%;
+		margin-top: 20px;
+	}
+	.offer img{
+		max-width: 50%;
+		margin: 0 auto;
+	}
+	#text-area{
 	}
 	#text-area a{
 		font-size: 20px;
@@ -70,19 +84,8 @@
 	#name{
 		font-size :16px;
 	}
-	.offer{
-		width: auto;
-		margin-top: 20px;
-	}
-	.offer img{
-		max-width: 50%;
-	}
-	.company-logo{
-		display: contents;
-	}
-	.company-logo img{
-		max-width: 75%;
-		resize: both;
+	#price{
+		font-size: 24px;
 	}
 	#dots{
 		width: 100%;
