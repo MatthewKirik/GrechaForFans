@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,8 +26,9 @@ namespace BLL.Parsers
             {
                 kiloStr = new string(
                     floatKilogramsRes.Value.TakeWhile(x => char.IsDigit(x) || x == ',' || x == '.')
-                    .ToArray());
-                float kilograms = float.Parse(kiloStr, System.Globalization.NumberStyles.Any);
+                    .ToArray())
+                    .Replace(',', '.');
+                float kilograms = float.Parse(kiloStr, CultureInfo.InvariantCulture.NumberFormat);
                 return Convert.ToInt32(kilograms * 1000);
             }
 
@@ -41,3 +43,4 @@ namespace BLL.Parsers
         }
     }
 }
+    

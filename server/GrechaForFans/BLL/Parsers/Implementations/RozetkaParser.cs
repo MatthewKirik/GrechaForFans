@@ -32,6 +32,7 @@ namespace BLL.Parsers.Implementations
 
         public async Task<List<LotDto>> ParseLots(int pagesAmount)
         {
+            Console.WriteLine("Parsing rozetka");
             List<LotDto> result = new List<LotDto>();
             await Task.Run(async () =>
             {

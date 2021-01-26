@@ -77,6 +77,7 @@ namespace BLL.Services.Implementations
 
         private async void Parse(CancellationToken cancellationToken)
         {
+            Console.WriteLine("Parsing started");
             int pagesToParse = int.Parse(config["Parsing:PagesToParse"]);
             int parsingDelay = int.Parse(config["Parsing:ParsingDelay"]);
 
