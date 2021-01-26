@@ -1,7 +1,8 @@
 'use strict';
 const CONFIG = {
 	MOBILE_SCRIPT_PATH: "js/mobile.js",
-	API_CHEAPEST_URL: "/api/lots/",
+	BASE_API_URL: "https://mighty-spire-65458.herokuapp.com",
+	API_LOTS_URL: "/api/lots/",
 	QUERY_PARAMETERS: { reversed: "order", minWeight: "fromWeight", maxWeight: "toWeight", limit: "limit"},
 	API_GET_ERROR_MESSAGE: "Помилка отримання даних",
 	DATA_DONT_EXIST_MESSAGE: "Data don't exists!",
@@ -32,7 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	//request data from server
 	const getData = async (reversed = false, filters, limit = 50) => {
-		const url = `${CONFIG.API_CHEAPEST_URL}?${CONFIG.QUERY_PARAMETERS.reversed}=${reversed ? "expensive" : "cheap"}`+ (filters.weight.minWeight ? `&${CONFIG.QUERY_PARAMETERS.minWeight}=${filters.weight.minWeight}` : "") + (filters.weight.maxWeight ? `&${CONFIG.QUERY_PARAMETERS.maxWeight}=${filters.weight.maxWeight}` : "") + `&${CONFIG.QUERY_PARAMETERS.limit}=${limit}`;
+		const url = CONFIG.BASE_API_URL
+			+`${CONFIG.API_LOTS_URL}?${CONFIG.QUERY_PARAMETERS.reversed}=${reversed ? "expensive" : "cheap"}`
+			+ (filters.weight.minWeight ? `&${CONFIG.QUERY_PARAMETERS.minWeight}=${filters.weight.minWeight}` : "")
+			+ (filters.weight.maxWeight ? `&${CONFIG.QUERY_PARAMETERS.maxWeight}=${filters.weight.maxWeight}` : "")
+			+ `&${CONFIG.QUERY_PARAMETERS.limit}=${limit}`;
 
 		try {
 			let response = await fetch(url, {method: "GET"});
