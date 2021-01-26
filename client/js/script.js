@@ -1,7 +1,7 @@
 'use strict';
 const CONFIG = {
 	MOBILE_SCRIPT_PATH: "js/mobile.js",
-	BASE_API_URL: "https://mighty-spire-65458.herokuapp.com",
+	BASE_API_URL: "https://grechaforfans-server.herokuapp.com",
 	API_LOTS_URL: "/api/lots/",
 	QUERY_PARAMETERS: { reversed: "order", minWeight: "fromWeight", maxWeight: "toWeight", limit: "limit"},
 	API_GET_ERROR_MESSAGE: "Помилка отримання даних",

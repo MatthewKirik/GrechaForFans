@@ -5,7 +5,8 @@
     "\\client\\css",
     "\\client\\js",
     "\\server",
-    "\\server\\GrechaForFans"
+    "\\server\\GrechaForFans",
+    "\\server\\GrechaForFans\\API"
   ],
   "SelectedNode": "\\server\\GrechaForFans\\GrechaForFans.sln",
   "PreviewInSolutionExplorer": false
