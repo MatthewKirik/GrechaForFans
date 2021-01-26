@@ -1,6 +1,6 @@
 # GrechaForFans
 ##### Веб-додаток, створенний для хакатону INT20H командою HellHunters.
-##### Поточна адреса веб-сайту:   http://grechaforfans-server.herokuapp.com/index.html
+##### Поточна адреса веб-сайту:   http://grechaforfans.herokuapp.com/index.html
 
 ### Короткий опис проекту
 * Додаток побудований на основі клієнт-серверної архітектури.
