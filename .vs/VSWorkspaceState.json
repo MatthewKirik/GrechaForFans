@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\client",
+    "\\client\\css",
+    "\\client\\js",
     "\\server",
     "\\server\\GrechaForFans"
   ],

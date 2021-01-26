@@ -16,8 +16,6 @@ namespace BLL.Parsers.Implementations
         private Microsoft.Extensions.Configuration.IConfiguration config;
         private ShopDto shop;
         private Regex keywordsRegex;
-        private Regex kilogramsRegex = new Regex("\\d+\\s*(кг)", RegexOptions.IgnoreCase);
-        private Regex gramsRegex = new Regex("\\d+\\s*(г)", RegexOptions.IgnoreCase);
         private bool disposedValue;
 
         public EpicentrParser(
@@ -87,7 +85,7 @@ namespace BLL.Parsers.Implementations
                 string priceStr = lotDiv.FindElement(By.CssSelector("span[class=\"card__price-sum\"]")).Text;
                 priceStr = new string(priceStr.Where(x => x != ' ').ToArray());
                 decimal price = decimal.Parse(new string(priceStr.TakeWhile(x => Char.IsDigit(x)).ToArray()));
-                int grams = GetGrams(title);
+                int grams = ParsingUtils.GetGrams(title);
 
                 return new LotDto()
                 {
@@ -108,17 +106,6 @@ namespace BLL.Parsers.Implementations
             {
                 return null;
             }
-        }
-
-        private int GetGrams(string str)
-        {
-            var gramsRes = gramsRegex.Match(str);
-            if (gramsRes.Success)
-                return int.Parse(new string(gramsRes.Value.TakeWhile(x => char.IsDigit(x)).ToArray()));
-            var kilogramsRes = kilogramsRegex.Match(str);
-            if (kilogramsRes.Success)
-                return int.Parse(new string(kilogramsRes.Value.TakeWhile(x => char.IsDigit(x)).ToArray())) * 1000;
-            return 1000;
         }
 
         protected virtual void Dispose(bool disposing)
