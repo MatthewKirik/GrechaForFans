@@ -18,9 +18,6 @@ namespace BLL.Parsers.Implementations
         private Microsoft.Extensions.Configuration.IConfiguration config;
         private ShopDto shop;
         private Regex keywordsRegex;
-        private Regex floatKilogramsRegex = new Regex("(0,)\\d+\\s*(кг)", RegexOptions.IgnoreCase);
-        private Regex kilogramsRegex = new Regex("\\d+\\s*(кг)", RegexOptions.IgnoreCase);
-        private Regex gramsRegex = new Regex("\\d+\\s*(г)", RegexOptions.IgnoreCase);
         private bool disposedValue;
 
         public PromUaParser(
@@ -76,7 +73,7 @@ namespace BLL.Parsers.Implementations
                 decimal price = decimal.Parse(new string(priceStr.TakeWhile(x => Char.IsDigit(x)).ToArray()));
                 int grams = ParsingUtils.GetGrams(title);
 
-                return new LotDto()
+                 return new LotDto()
                 {
                     Shop = this.shop,
                     ImageLink = imgLink,
