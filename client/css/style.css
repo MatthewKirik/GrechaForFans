@@ -92,9 +92,20 @@ input[type="text"]{
 	font-family: 'Yusei Magic', sans-serif;
 	font-size: 24px;
 }
-#name{
+#title{
 	font-family: 'Roboto Slab', serif;
-	font-size :16;
+	font-size: 16px;
+	max-width: 100%;
+	max-height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.text-area{
+	display: flex;
+	width: 66.6%;
+	flex-direction: column;
+	justify-content: space-around;
+	margin: 0 10px;
 }
 #text-area a{
 	padding: 2px;
@@ -104,7 +115,7 @@ input[type="text"]{
 	#price{
 		font-size: 16px;
 	}
-	#name{
+	#title{
 		font-size :12px;
 	}
 	#text-area a{
@@ -158,10 +169,4 @@ input[type="text"]{
 .company-logo img{
 	max-width: 100%;
 	resize: both;
-}
-.text-area{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	margin: 0 10px;
 }
