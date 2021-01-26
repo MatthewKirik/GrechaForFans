@@ -1,4 +1,4 @@
-@media (max-width: 1023px){
+@media (max-width: 1100px){
 	html, body{
 		height: 100vh;
 	}
@@ -101,6 +101,14 @@
 	.dot{
 		user-select: none;
 		cursor: pointer;
+	}
+	.company-logo{
+		resize: both;
+	}
+	.company-logo img{
+		min-width: 70%;
+		max-height: 80%;
+		resize: both;
 	}
 	@media (orientation: landscape) {
 		header{

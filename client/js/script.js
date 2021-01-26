@@ -10,6 +10,7 @@ const CONFIG = {
 	FILTERS_TEMPLATE: { weight: {minWeight: null, maxWeight: null}, },
 	SORT_PRICE_UP_MESSAGE: "Сортувати за ціною: ▲",
 	SORT_PRICE_DOWN_MESSAGE: "Сортувати за ціною: ▼", 
+	MOBILE_MAX_SIZE: 1123,
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.getElementsByTagName('body')[0].appendChild(script);
 	}
 
-	if(window.innerWidth < 1023) {
+	if(window.innerWidth < CONFIG.MOBILE_MAX_SIZE) {
 		include(CONFIG.MOBILE_SCRIPT_PATH);
 	}
 
