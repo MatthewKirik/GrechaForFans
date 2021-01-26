@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang = "ua">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>GrechaForFans</title>
+	<link rel="shortcut icon" href="img/icon.png">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+	<header>
+		<div id="logo">
+			<img class="hidden" id="left-logo" src="img/logo-img.jpg" alt="left-logo">
+			<img id="long-logo" src="img/long-logo.png" alt="long-logo">
+		</div>
+	</header>
+	<div id="content">
+		<div id="menu-block" hidden>
+			<button id = "sorter">Сортувати за ціною: ▼</button>
+			<div id="filter">
+				<h4>Фільтрувати за: </h4>
+				<div id="weight-filter">
+					<h3>Вага: </h3>
+					<p>
+						<label for="minWeight">Мінімальна вага:</label>
+						<input type="number" name="minWeight" id="minWeight" placeholder="0">
+						<label for="maxWeight">Максимальна вага:</label>
+						<input type="number" name="maxWeight" id="maxWeight" placeholder="1000">      
+					</p>
+				</div>
+				<button id="filter-accept">Прийняти фільтри</button>
+			</div>
+		</div>
+		<div id="arrow-box" style="display: none; left: 0%;">
+			<img src="img/arrow.png" id ="arrow" alt="">
+		</div>
+		<hr class = "hidden" id = "spacer">
+		<div id="offers">
+			<div class="offer-block" id="rozetka-offers">
+				<div class="company-logo">
+					<img src="img/Rozetka.png" alt="">
+				</div>
+			</div>
+			<div class="offer-block hidden" id="prom-offers">
+				<div class="company-logo">
+					<img src="img/Prom.png" alt="">
+				</div>
+			</div>
+			<div class="offer-block hidden" id="epicentr-offers">
+				<div class="company-logo">
+					<img src="img/Epicentr.png" alt="">
+				</div>
+			</div>
+			<div id="dots" style="display: none;">
+				<span class = "dot" for="rozetka-offers"></span>
+				<span class = "dot" for="prom-offers"></span>
+				<span class = "dot" for="epicentr-offers"></span>
+			</div>
+		</div>
+	</div>
+	<script src="js/script.js"></script>
+</body>
+</html>
