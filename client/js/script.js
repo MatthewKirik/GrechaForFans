@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	//request data from server
 	const getData = async (reversed = false, filters, limit = 50) => {
-		const url = `${CONFIG.API_CHEAPEST_URL}?${CONFIG.QUERY_PARAMETERS.reversed}=${reversed ? "expensive" : "cheap"}&${CONFIG.QUERY_PARAMETERS.minWeight}=${filters.weight.minWeight}&${CONFIG.QUERY_PARAMETERS.maxWeight}=${filters.weight.maxWeight}&${CONFIG.QUERY_PARAMETERS.limit}=${limit}`;
+		const url = `${CONFIG.API_CHEAPEST_URL}?${CONFIG.QUERY_PARAMETERS.reversed}=${reversed ? "expensive" : "cheap"}`+ (filters.weight.minWeight ? `&${CONFIG.QUERY_PARAMETERS.minWeight}=${filters.weight.minWeight}` : "") + (filters.weight.maxWeight ? `&${CONFIG.QUERY_PARAMETERS.maxWeight}=${filters.weight.maxWeight}` : "") + `&${CONFIG.QUERY_PARAMETERS.limit}=${limit}`;
 
 		try {
 			let response = await fetch(url, {method: "GET"});
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			const showLot = lot => {
 				const shopName = lot.shop.name;
 
-				const shopElement 	= 	document.querySelector(`.offer-block[id="${shopName}-offers"]`);
+				const shopElement 	= 	document.querySelector(`.offer-block[id="${shopName.toLowerCase()}-offers"]`);
 				const offer 		= 	document.createElement("div"								  );
 				const offerImage 	= 	document.createElement("img"								  );
 				const textArea 		= 	document.createElement("div"								  );
