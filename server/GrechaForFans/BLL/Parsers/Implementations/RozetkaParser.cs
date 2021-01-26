@@ -90,6 +90,7 @@ namespace BLL.Parsers.Implementations
 
                 string imgLink = imgElement.GetAttribute("src");
                 string priceStr = lotDiv.FindElement(By.CssSelector("span[class=\"goods-tile__price-value\"]")).Text;
+                priceStr = new string(priceStr.Where(x => x != ' ').ToArray());
                 decimal price = decimal.Parse(new string(priceStr.TakeWhile(x => Char.IsDigit(x)).ToArray()));
                 int grams = GetGrams(title);
 
