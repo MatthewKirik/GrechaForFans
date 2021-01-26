@@ -18,6 +18,7 @@ li{
 }
 button{
 	cursor: pointer;
+	outline: none;
 }
 header{
 	display: block;
@@ -88,17 +89,23 @@ input[type="text"]{
 	background-color:rgb(46, 199, 46);
 	color: #ffffff;
 }
+#filter h4, #filter h3,#weight-filter p{
+	font-family: 'Yusei Magic', sans-serif;
+}
 #price{
 	font-family: 'Yusei Magic', sans-serif;
 	font-size: 24px;
 }
 #title{
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Yusei Magic', sans-serif;
 	font-size: 16px;
 	max-width: 100%;
-	max-height: 40px;
+	max-height: 37px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+#weight-filter p input{
+	margin-bottom: 10px;
 }
 .text-area{
 	display: flex;
@@ -107,10 +114,12 @@ input[type="text"]{
 	justify-content: space-around;
 	margin: 0 10px;
 }
-#text-area a{
+.text-area a{
 	padding: 2px;
-	font-size: 20px;	
+	font-size: 20px;
+	font-family: 'Yusei Magic', sans-serif;
 }
+/*
 @media (max-width: 1220px){
 	#price{
 		font-size: 16px;
@@ -123,6 +132,7 @@ input[type="text"]{
 	}
 
 }
+*/
 #offers{
 	display: flex;
 	justify-content: space-around;
@@ -166,7 +176,11 @@ input[type="text"]{
 	resize: both;
 	margin: 0 auto;
 }
+.company-logo{
+	resize: both;
+}
 .company-logo img{
-	max-width: 100%;
+	min-width: 70%;
+	max-height: 80%;
 	resize: both;
 }
