@@ -1,4 +1,5 @@
 ﻿using DataTransfer;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,6 @@ namespace BLL.Parsers
 {
     interface IParser
     {
-        public Task Initialize(ShopDto shop, Regex keywordsPattern);
         public Task<List<LotDto>> ParseLots(int pagesAmount);
     }
 }

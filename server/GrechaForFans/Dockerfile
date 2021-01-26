@@ -27,4 +27,4 @@ COPY --from=publish /app/publish .
 FROM matthewkirik/debian-with-chrome
 WORKDIR /app
 COPY --from=final /app .
-ENTRYPOINT /bin/sh
+ENTRYPOINT ["dotnet", "API.dll"] 

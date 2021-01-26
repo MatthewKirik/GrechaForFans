@@ -4,6 +4,7 @@ using DAL.Repositories;
 using DataTransfer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,20 +42,27 @@ namespace BLL.Services.Implementations
             pattern = pattern.Remove(pattern.Length - 1);
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
 
-            ShopDto shopDto = new ShopDto();
+            var options = new ChromeOptions();
+            options.AddArguments("headless");
+            options.AddArguments("--disable-dev-shm-usage");
+            options.AddArguments("--no-sandbox");
+            options.AddArguments("no-sandbox");
+            var path = Environment.GetEnvironmentVariable("CHROMEDRIVER_DIRECTORY");
+            ChromeDriverService chromeService;
+            if (path != null)
+                chromeService = ChromeDriverService.CreateDefaultService(path);
+            else
+                chromeService = ChromeDriverService.CreateDefaultService();
+            var webDriver = new ChromeDriver(chromeService, options, TimeSpan.FromMinutes(3));
+            webDriver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(30));
 
             var promUaShop = await shopsRepository.GetShop("Prom");
             var rozetkaShop = await shopsRepository.GetShop("Rozetka");
             var epicentrShop = await shopsRepository.GetShop("Epicentr");
 
-            var promUaParser = new PromUaParser(config);
-            await promUaParser.Initialize(promUaShop, regex);
-
-            var rozetkaParser = new RozetkaParser(config);
-            await rozetkaParser.Initialize(rozetkaShop, regex);
-
-            var epicentrParser = new EpicentrParser(config);
-            await epicentrParser.Initialize(epicentrShop, regex);
+            var promUaParser = new PromUaParser(config, promUaShop, regex, webDriver);
+            var rozetkaParser = new RozetkaParser(config, rozetkaShop, regex, webDriver);
+            var epicentrParser = new EpicentrParser(config, epicentrShop, regex, webDriver);
 
             parsers.Add(promUaParser);
             parsers.Add(rozetkaParser);
@@ -74,11 +82,12 @@ namespace BLL.Services.Implementations
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                var tasks = parsers
-                    .Select(x => ParseAndUpdate(x, pagesToParse));
-                await Task.WhenAll(tasks);
+                foreach (var parser in parsers)
+                {
+                    await ParseAndUpdate(parser, pagesToParse);
+                }
+                await Task.Delay(parsingDelay * 1000);
             }
-            await Task.Delay(parsingDelay * 1000);
         }
 
         private async Task ParseAndUpdate(IParser parser, int pagesToParse)

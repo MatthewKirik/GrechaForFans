@@ -32,10 +32,11 @@ namespace API
                         opts.Listen(IPAddress.Loopback, port: 5002);
                         //opts.ListenAnyIP(5003);
                         var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                        var port = int.Parse(Environment.GetEnvironmentVariable("PORT") ?? "5003");
                         if(environment == Environments.Development)
-                            opts.ListenAnyIP(5003, opts => opts.UseHttps());
+                            opts.ListenAnyIP(port, opts => opts.UseHttps());
                         else
-                            opts.ListenAnyIP(5003);
+                            opts.ListenAnyIP(port);
                     });
                 });
     }

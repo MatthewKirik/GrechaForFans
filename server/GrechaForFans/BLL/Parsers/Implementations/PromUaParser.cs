@@ -22,31 +22,16 @@ namespace BLL.Parsers.Implementations
         private Regex gramsRegex = new Regex("\\d+\\s*(г)", RegexOptions.IgnoreCase);
         private bool disposedValue;
 
-        public PromUaParser(Microsoft.Extensions.Configuration.IConfiguration config)
+        public PromUaParser(
+            Microsoft.Extensions.Configuration.IConfiguration config,
+            ShopDto shop,
+            Regex keywordsPattern,
+            IWebDriver webDriver)
         {
             this.config = config;
-        }
-
-        public async Task Initialize(ShopDto shop, Regex keywordsPattern)
-        {
-            await Task.Run(() =>
-            {
-                var options = new ChromeOptions();
-                options.AddArguments("headless");
-                options.AddArguments("--disable-dev-shm-usage");
-                options.AddArguments("--no-sandbox");
-                options.AddArguments("no-sandbox");
-                var path = Environment.GetEnvironmentVariable("CHROMEDRIVER_DIRECTORY");
-                ChromeDriverService chromeService;
-                if (path != null)
-                    chromeService = ChromeDriverService.CreateDefaultService(path);
-                else
-                    chromeService = ChromeDriverService.CreateDefaultService();
-                webDriver = new ChromeDriver(chromeService, options, TimeSpan.FromMinutes(3));
-                webDriver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(30));
-                this.shop = shop;
-                this.keywordsRegex = keywordsPattern;
-            });
+            this.webDriver = webDriver;
+            this.shop = shop;
+            this.keywordsRegex = keywordsPattern;
         }
 
         public async Task<List<LotDto>> ParseLots(int pagesAmount)
