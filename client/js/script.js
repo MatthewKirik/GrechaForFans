@@ -26,8 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	//reload page on resize for re-enumarating parameters in mobile.js
-	document.querySelector("body").onresize = () => {
-		window.location.reload();
+	const oldWidth = window.innerWidth;
+	window.onresize = function () {
+		const newWidth = window.innerWidth;
+		if (newWidth != oldWidth) {
+			location.reload();
+		}
 	};
 
 
