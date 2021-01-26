@@ -35,11 +35,15 @@ namespace BLL.Parsers.Implementations
                 options.AddArguments("headless");
                 options.AddArguments("--disable-dev-shm-usage");
                 options.AddArguments("--no-sandbox");
+                options.AddArguments("no-sandbox");
                 var path = Environment.GetEnvironmentVariable("CHROMEDRIVER_DIRECTORY");
-                if(path != null)
-                    webDriver = new ChromeDriver(path, options);
+                ChromeDriverService chromeService;
+                if (path != null)
+                    chromeService = ChromeDriverService.CreateDefaultService(path);
                 else
-                    webDriver = new ChromeDriver(options);
+                    chromeService = ChromeDriverService.CreateDefaultService();
+                webDriver = new ChromeDriver(chromeService, options, TimeSpan.FromMinutes(3));
+                webDriver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(30));
                 this.shop = shop;
                 this.keywordsRegex = keywordsPattern;
             });

@@ -24,7 +24,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-FROM debian-with-chrome
+FROM matthewkirik/debian-with-chrome
 WORKDIR /app
 COPY --from=final /app .
 ENTRYPOINT /bin/sh

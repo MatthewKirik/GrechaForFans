@@ -21,7 +21,7 @@ namespace DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            var connectionString = Environment.GetEnvironmentVariable("buckweat.connectionstring");
+            var connectionString = Environment.GetEnvironmentVariable("buckweat_connectionstring");
             if(connectionString == null)
             {
                 string path =

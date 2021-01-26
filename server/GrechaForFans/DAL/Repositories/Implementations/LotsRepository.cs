@@ -83,13 +83,14 @@ namespace DAL.Repositories.Implementations
 
                 var oredredLotsQuery = orderedPricesQuery
                     .Take(limit)
-                    .Select(x => new { Lot = x.Lot, Price = x });
+                    .Select(x => new { Lot = x.Lot, Price = x, Shop = x.Lot.Shop });
 
                 var orderedLots = await oredredLotsQuery.ToListAsync();
                 var orderedLotsDtos = orderedLots.Select(x =>
                 {
                     var mapped = mapper.Map<Lot, LotDto>(x.Lot);
                     mapped.Price = mapper.Map<Price, PriceDto>(x.Price);
+                    mapped.Shop = mapper.Map<Shop, ShopDto>(x.Shop);
                     return mapped;
                 });
 
