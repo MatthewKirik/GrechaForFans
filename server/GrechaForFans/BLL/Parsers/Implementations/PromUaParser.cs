@@ -60,32 +60,39 @@ namespace BLL.Parsers.Implementations
 
         private LotDto ParseLot(IWebElement lotDiv)
         {
-            var a = lotDiv.FindElement(By.CssSelector("a[data-qaid=\"product_link\"]"));
-            string title = a.GetAttribute("title");
-            if (!keywordsRegex.IsMatch(title))
-                return null;
-
-            string link = new string(a.GetAttribute("href").TakeWhile(x => x != '?').ToArray());
-            var imgElement = lotDiv.FindElement(By.CssSelector("img"));
-            string imgLink = imgElement.GetAttribute("src");
-            string priceStr = lotDiv.FindElement(By.CssSelector("span[data-qaprice]")).GetAttribute("data-qaprice");
-            decimal price = decimal.Parse(new string(priceStr.TakeWhile(x => Char.IsDigit(x)).ToArray()));
-            int grams = GetGrams(title);
-            
-            return new LotDto()
+            try
             {
-                Shop = this.shop,
-                ImageLink = imgLink,
-                Link = link,
-                Manufacturer = null,
-                Title = title,
-                WeightInGrams = grams,
-                Price = new PriceDto()
+                var a = lotDiv.FindElement(By.CssSelector("a[data-qaid=\"product_link\"]"));
+                string title = a.GetAttribute("title");
+                if (!keywordsRegex.IsMatch(title))
+                    return null;
+
+                string link = new string(a.GetAttribute("href").TakeWhile(x => x != '?').ToArray());
+                var imgElement = lotDiv.FindElement(By.CssSelector("img"));
+                string imgLink = imgElement.GetAttribute("src");
+                string priceStr = lotDiv.FindElement(By.CssSelector("span[data-qaprice]")).GetAttribute("data-qaprice");
+                decimal price = decimal.Parse(new string(priceStr.TakeWhile(x => Char.IsDigit(x)).ToArray()));
+                int grams = GetGrams(title);
+
+                return new LotDto()
                 {
-                    Date = DateTime.Now,
-                    Value = price
-                }
-            };
+                    Shop = this.shop,
+                    ImageLink = imgLink,
+                    Link = link,
+                    Manufacturer = null,
+                    Title = title,
+                    WeightInGrams = grams,
+                    Price = new PriceDto()
+                    {
+                        Date = DateTime.Now,
+                        Value = price
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         private int GetGrams(string str)
